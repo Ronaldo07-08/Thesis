@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/other_layout"
+    tools:context=".OtherActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line7" />
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="@font/jost"
+        android:gravity="top"
+        android:text="Прочее"
+        android:textColor="@color/black"
+        android:textSize="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/jost"
+        android:gravity="top"
+        android:text="Nickname"
+        android:textColor="@color/black"
+        android:textSize="27dp"
+        app:layout_constraintStart_toStartOf="@+id/other"
+        app:layout_constraintTop_toBottomOf="@+id/other" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/notificationsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:src="@drawable/bell"
+            app:layout_constraintEnd_toEndOf="@+id/notificationsButton"
+            app:layout_constraintTop_toTopOf="@+id/notificationsButton" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/jost"
+            android:gravity="top"
+            android:text="Уведомления"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/notificationsButton"
+            app:layout_constraintStart_toStartOf="@+id/notificationsButton"
+            app:layout_constraintTop_toTopOf="@+id/notificationsButton" />
+
+
+        <ImageButton
+            android:id="@+id/tasksButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notificationsButton" />
+
+        <ImageView
+            android:id="@+id/tasks"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:src="@drawable/donetasks"
+            app:layout_constraintEnd_toEndOf="@+id/tasksButton"
+            app:layout_constraintTop_toTopOf="@+id/tasksButton" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/jost"
+            android:gravity="top"
+            android:text="Выполненные задачи"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tasksButton"
+            app:layout_constraintStart_toStartOf="@+id/tasksButton"
+            app:layout_constraintTop_toTopOf="@+id/tasksButton" />
+
+
+        <ImageButton
+            android:id="@+id/exportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tasksButton" />
+
+        <ImageView
+            android:id="@+id/export"
+            android:layout_width="33dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:src="@drawable/archive"
+            app:layout_constraintEnd_toEndOf="@+id/exportButton"
+            app:layout_constraintTop_toTopOf="@+id/exportButton" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/jost"
+            android:gravity="top"
+            android:text="Экспорт расписания"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/exportButton"
+            app:layout_constraintStart_toStartOf="@+id/exportButton"
+            app:layout_constraintTop_toTopOf="@+id/exportButton" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/botChatButton"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exportButton"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Чат с ботом"
+            android:fontFamily="@font/jost"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:gravity="top"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/botChatButton"
+            app:layout_constraintStart_toStartOf="@+id/botChatButton"
+            app:layout_constraintTop_toTopOf="@+id/botChatButton"/>
+
+        <ImageView
+            android:layout_width="33dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:src="@drawable/botmessage"
+            app:layout_constraintEnd_toEndOf="@+id/botChatButton"
+            app:layout_constraintTop_toTopOf="@+id/botChatButton" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/bottom_menu"
+        layout="@layout/menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
