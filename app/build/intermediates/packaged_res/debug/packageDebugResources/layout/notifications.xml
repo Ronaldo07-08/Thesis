@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notifications"
+    tools:context=".NotificationsActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line7" />
+
+    <TextView
+        android:id="@+id/notificationsRect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/jost"
+        android:gravity="bottom"
+        android:text="Уведомления"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
+    <ImageButton
+        android:id="@+id/pointer"
+        android:layout_width="48dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/beige"
+        android:src="@drawable/pointer"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/notificationsRect" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.042">
+
+        <ImageView
+            android:id="@+id/motivation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Switch
+            android:id="@+id/motivationButton"
+            android:layout_width="325dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:fontFamily="@font/jost"
+            android:switchPadding="80dp"
+            android:text="Мотивационные"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            app:layout_constraintBottom_toBottomOf="@+id/motivation"
+            app:layout_constraintStart_toStartOf="@+id/motivation"
+            app:layout_constraintTop_toTopOf="@+id/motivation"
+            app:layout_constraintVertical_bias="0.578"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+        <ImageView
+            android:id="@+id/deadlines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/motivation" />
+
+        <Switch
+            android:id="@+id/DedlinesButton"
+            android:layout_width="324dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:fontFamily="@font/jost"
+            android:switchPadding="110dp"
+            android:text="О дедлайнах"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            app:layout_constraintBottom_toBottomOf="@+id/deadlines"
+            app:layout_constraintStart_toStartOf="@+id/deadlines"
+            app:layout_constraintTop_toTopOf="@+id/deadlines"
+            app:layout_constraintVertical_bias="0.578"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/recomendations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@color/beige"
+            android:src="@drawable/widerect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deadlines" />
+
+        <Switch
+            android:id="@+id/recomendationsButton"
+            android:layout_width="326dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:fontFamily="@font/jost"
+            android:switchPadding="98dp"
+            android:text="Рекомендации"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            app:layout_constraintBottom_toBottomOf="@+id/recomendations"
+            app:layout_constraintStart_toStartOf="@+id/recomendations"
+            app:layout_constraintTop_toTopOf="@+id/recomendations"
+            app:layout_constraintVertical_bias="0.578"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/bottom_menu"
+        layout="@layout/menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

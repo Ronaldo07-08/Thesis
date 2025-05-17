@@ -1,0 +1,266 @@
+[
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xhdpi_ic_thesis.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xhdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_switch_track.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\switch_track.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_widerectorange.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\widerectorange.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_ic_thesis_background.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\ic_thesis_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xhdpi_ic_thesis_foreground.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xhdpi\\ic_thesis_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-mdpi_ic_thesis_round.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-mdpi\\ic_thesis_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_checkbox_unchecked.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\checkbox_unchecked.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_archive.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\archive.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\font_fonts.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\font\\fonts.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\font_jostitalic.ttf.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\font\\jostitalic.ttf"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\font_jost.ttf.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\font\\jost.ttf"
+    },
+    {
+        "merged": "com.example.vmeste.app-debug-42:/drawable_rounded_corner.xml.flat",
+        "source": "com.example.vmeste.app-main-44:/drawable/rounded_corner.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_notifications.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\notifications.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-anydpi-v26_ic_thesis_round.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-anydpi-v26\\ic_thesis_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_pluscircle.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\pluscircle.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_menu.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\menu.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_line7.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\line7.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_menu_bottom.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\menu_bottom.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxhdpi_ic_thesis_foreground.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxhdpi\\ic_thesis_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_other.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\other.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_switch_thumb.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\switch_thumb.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxxhdpi_ic_thesis_round.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxxhdpi\\ic_thesis_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_bot_task_line.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\bot_task_line.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxxhdpi_ic_thesis.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxxhdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_donetasks.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\donetasks.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_rect.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\rect.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_ellipse.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\ellipse.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_item_task.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\item_task.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-hdpi_ic_thesis.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-hdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_rounded_corners_name.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\rounded_corners_name.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xhdpi_ic_thesis_round.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xhdpi\\ic_thesis_round.webp"
+    },
+    {
+        "merged": "com.example.vmeste.app-debug-42:/layout_message_item.xml.flat",
+        "source": "com.example.vmeste.app-main-44:/layout/message_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_rectorange.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\rectorange.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_rounded_corners.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\rounded_corners.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_calendar.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\calendar.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_add_task.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\add_task.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_clock.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\clock.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_widerect.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\widerect.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_trash.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\trash.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-hdpi_ic_thesis_round.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-hdpi\\ic_thesis_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxxhdpi_ic_thesis_foreground.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxxhdpi\\ic_thesis_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_task_overview.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\task_overview.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_bell.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\bell.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_menucurr.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\menucurr.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_homecurr.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\homecurr.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxhdpi_ic_thesis_round.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxhdpi\\ic_thesis_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-hdpi_ic_thesis_foreground.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-hdpi\\ic_thesis_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_pointer.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\pointer.png"
+    },
+    {
+        "merged": "com.example.vmeste.app-debug-42:/layout_activity_chat.xml.flat",
+        "source": "com.example.vmeste.app-main-44:/layout/activity_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_dots.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\dots.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_botmessage.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\botmessage.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_checkbox_selector.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\checkbox_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_tasks.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\tasks.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xxhdpi_ic_thesis.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xxhdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_ellipse_small.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\ellipse_small.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-anydpi-v26_ic_thesis.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-anydpi-v26\\ic_thesis.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_checkbox_checked.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\checkbox_checked.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_done_tasks.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\done_tasks.xml"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-mdpi_ic_thesis_foreground.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-mdpi\\ic_thesis_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_task_ellipse.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\task_ellipse.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-mdpi_ic_thesis.webp.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-mdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_home.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\home.png"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_taskscurr.png.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\taskscurr.png"
+    }
+]

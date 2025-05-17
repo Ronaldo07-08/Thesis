@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Цвет фона -->
+    <solid android:color="@color/orange" /> <!-- Замените на нужный цвет -->
+
+    <!-- Радиус закругления углов -->
+    <corners android:radius="22dp" /> <!-- Укажите нужный радиус -->
+
+    <!-- Граница (рамка) -->
+    <stroke
+        android:width="0dp"
+        android:color="#000000" /> <!-- Цвет и толщина рамки -->
+</shape>
