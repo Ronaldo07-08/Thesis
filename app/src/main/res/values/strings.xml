@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Vmeste</string>
+    <string name="enter_message">Введите сообщение...</string>
+    <string name="send">Отправить</string>
+    <string name="together_api_key">e219e337db72814dcd5dcca6875008f899214a15e26591c3cbab35c775e78fef</string>
+    <string name="apiKey">tgp_v1_1UjcHiCjv_Dy5OaokZmYC5cjuaaQs0M_OzUTMk5Vs7k</string>
 </resources>

@@ -46,6 +46,14 @@ public class OtherActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        botBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OtherActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
 //
 //        exportBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -55,14 +63,6 @@ public class OtherActivity extends BaseActivity {
 //            }
 //        });
 //
-//        botBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(OtherActivity.this, BotChatActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
     }
 
 }
