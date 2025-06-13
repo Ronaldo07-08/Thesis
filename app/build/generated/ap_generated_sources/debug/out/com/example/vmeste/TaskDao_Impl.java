@@ -6,7 +6,6 @@ import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
-import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
@@ -32,14 +31,12 @@ public final class TaskDao_Impl implements TaskDao {
 
   private final EntityDeletionOrUpdateAdapter<TaskDataModel> __updateAdapterOfTaskDataModel;
 
-  private final SharedSQLiteStatement __preparedStmtOfDeleteAllTasks;
-
   public TaskDao_Impl(RoomDatabase __db) {
     this.__db = __db;
     this.__insertionAdapterOfTaskDataModel = new EntityInsertionAdapter<TaskDataModel>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `tasks` (`id`,`title`,`description`,`is_completed`,`comments_count`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR ABORT INTO `tasks` (`id`,`title`,`description`,`is_completed`,`comments_count`,`importance`,`complexity`,`base_time`,`priority`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -58,6 +55,10 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmp = value.isCompleted() ? 1 : 0;
         stmt.bindLong(4, _tmp);
         stmt.bindLong(5, value.getCommentsCount());
+        stmt.bindLong(6, value.getImportance());
+        stmt.bindLong(7, value.getComplexity());
+        stmt.bindLong(8, value.getBaseTime());
+        stmt.bindDouble(9, value.getPriority());
       }
     };
     this.__deletionAdapterOfTaskDataModel = new EntityDeletionOrUpdateAdapter<TaskDataModel>(__db) {
@@ -74,7 +75,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__updateAdapterOfTaskDataModel = new EntityDeletionOrUpdateAdapter<TaskDataModel>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `tasks` SET `id` = ?,`title` = ?,`description` = ?,`is_completed` = ?,`comments_count` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `tasks` SET `id` = ?,`title` = ?,`description` = ?,`is_completed` = ?,`comments_count` = ?,`importance` = ?,`complexity` = ?,`base_time` = ?,`priority` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -93,14 +94,11 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmp = value.isCompleted() ? 1 : 0;
         stmt.bindLong(4, _tmp);
         stmt.bindLong(5, value.getCommentsCount());
-        stmt.bindLong(6, value.getId());
-      }
-    };
-    this.__preparedStmtOfDeleteAllTasks = new SharedSQLiteStatement(__db) {
-      @Override
-      public String createQuery() {
-        final String _query = "DELETE FROM tasks";
-        return _query;
+        stmt.bindLong(6, value.getImportance());
+        stmt.bindLong(7, value.getComplexity());
+        stmt.bindLong(8, value.getBaseTime());
+        stmt.bindDouble(9, value.getPriority());
+        stmt.bindLong(10, value.getId());
       }
     };
   }
@@ -142,22 +140,8 @@ public final class TaskDao_Impl implements TaskDao {
   }
 
   @Override
-  public void deleteAllTasks() {
-    __db.assertNotSuspendingTransaction();
-    final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteAllTasks.acquire();
-    __db.beginTransaction();
-    try {
-      _stmt.executeUpdateDelete();
-      __db.setTransactionSuccessful();
-    } finally {
-      __db.endTransaction();
-      __preparedStmtOfDeleteAllTasks.release(_stmt);
-    }
-  }
-
-  @Override
   public LiveData<List<TaskDataModel>> getAllTasks() {
-    final String _sql = "SELECT * FROM tasks ORDER BY id DESC";
+    final String _sql = "SELECT * FROM tasks ORDER BY priority DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[]{"tasks"}, false, new Callable<List<TaskDataModel>>() {
       @Override
@@ -169,6 +153,10 @@ public final class TaskDao_Impl implements TaskDao {
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
           final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
+          final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
+          final int _cursorIndexOfComplexity = CursorUtil.getColumnIndexOrThrow(_cursor, "complexity");
+          final int _cursorIndexOfBaseTime = CursorUtil.getColumnIndexOrThrow(_cursor, "base_time");
+          final int _cursorIndexOfPriority = CursorUtil.getColumnIndexOrThrow(_cursor, "priority");
           final List<TaskDataModel> _result = new ArrayList<TaskDataModel>(_cursor.getCount());
           while(_cursor.moveToNext()) {
             final TaskDataModel _item;
@@ -196,6 +184,18 @@ public final class TaskDao_Impl implements TaskDao {
             final int _tmpCommentsCount;
             _tmpCommentsCount = _cursor.getInt(_cursorIndexOfCommentsCount);
             _item.setCommentsCount(_tmpCommentsCount);
+            final int _tmpImportance;
+            _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+            _item.setImportance(_tmpImportance);
+            final int _tmpComplexity;
+            _tmpComplexity = _cursor.getInt(_cursorIndexOfComplexity);
+            _item.setComplexity(_tmpComplexity);
+            final int _tmpBaseTime;
+            _tmpBaseTime = _cursor.getInt(_cursorIndexOfBaseTime);
+            _item.setBaseTime(_tmpBaseTime);
+            final float _tmpPriority;
+            _tmpPriority = _cursor.getFloat(_cursorIndexOfPriority);
+            _item.setPriority(_tmpPriority);
             _result.add(_item);
           }
           return _result;
@@ -225,6 +225,10 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
       final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
       final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
+      final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
+      final int _cursorIndexOfComplexity = CursorUtil.getColumnIndexOrThrow(_cursor, "complexity");
+      final int _cursorIndexOfBaseTime = CursorUtil.getColumnIndexOrThrow(_cursor, "base_time");
+      final int _cursorIndexOfPriority = CursorUtil.getColumnIndexOrThrow(_cursor, "priority");
       final TaskDataModel _result;
       if(_cursor.moveToFirst()) {
         final String _tmpTitle;
@@ -251,6 +255,18 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmpCommentsCount;
         _tmpCommentsCount = _cursor.getInt(_cursorIndexOfCommentsCount);
         _result.setCommentsCount(_tmpCommentsCount);
+        final int _tmpImportance;
+        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        _result.setImportance(_tmpImportance);
+        final int _tmpComplexity;
+        _tmpComplexity = _cursor.getInt(_cursorIndexOfComplexity);
+        _result.setComplexity(_tmpComplexity);
+        final int _tmpBaseTime;
+        _tmpBaseTime = _cursor.getInt(_cursorIndexOfBaseTime);
+        _result.setBaseTime(_tmpBaseTime);
+        final float _tmpPriority;
+        _tmpPriority = _cursor.getFloat(_cursorIndexOfPriority);
+        _result.setPriority(_tmpPriority);
       } else {
         _result = null;
       }

@@ -9,6 +9,10 @@
         android:targetSdkVersion="35" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <permission
         android:name="com.example.vmeste.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -63,10 +67,17 @@
             android:exported="false"
             android:label="Добавить задачку" >
         </activity>
+
+        <receiver android:name="com.example.vmeste.NotificationReceiver" />
+
         <activity
             android:name="com.example.vmeste.ChatActivity"
             android:exported="false"
             android:label="AI Chat" />
+        <activity
+            android:name="com.example.vmeste.ChatBotActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"

@@ -11,37 +11,57 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
+    private List<Message> messagesList;
 
-    private final List<String> messages;
+    public static class Message {
+        public String text;
+        public boolean isUser;
 
-    public MessageAdapter(List<String> messages) {
-        this.messages = messages;
+        public Message(String text, boolean isUser) {
+            this.text = text;
+            this.isUser = isUser;
+        }
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        public TextView messageTextView;
-
-        public MessageViewHolder(@NonNull View itemView) {
-            super(itemView);
-            messageTextView = itemView.findViewById(R.id.text_view_message);
-        }
+    public MessageAdapter(List<Message> messagesList) {
+        this.messagesList = messagesList;
     }
 
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.message_item, parent, false);
-        return new MessageViewHolder(itemView);
+        return new MessageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        holder.messageTextView.setText(messages.get(position));
+        Message message = messagesList.get(position);
+        if (message.isUser) {
+            holder.userMessage.setText(message.text);
+            holder.userMessage.setVisibility(View.VISIBLE);
+            holder.aiMessage.setVisibility(View.GONE);
+        } else {
+            holder.aiMessage.setText(message.text);
+            holder.aiMessage.setVisibility(View.VISIBLE);
+            holder.userMessage.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return messagesList.size();
+    }
+
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
+        TextView userMessage;
+        TextView aiMessage;
+
+        public MessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            userMessage = itemView.findViewById(R.id.text_view_message_user);
+            aiMessage = itemView.findViewById(R.id.text_view_message_ai);
+        }
     }
 }

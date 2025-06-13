@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.Vmeste"
+    android:id="@+id/popupCalendar">
+
+    <ImageView
+        android:id="@+id/popupBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/popup_calendar_bg" />
+
+    <ImageButton
+        android:id="@+id/popupClose"
+        android:layout_width="50dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="@+id/popupBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/popup_cal_back" />
+
+    <ImageButton
+        android:id="@+id/arrowRight"
+        android:layout_width="33dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="96dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="@+id/popupBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar_next" />
+
+    <TextView
+        android:id="@+id/popupMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="9dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/arrowRight"
+        app:layout_constraintStart_toEndOf="@+id/arrowLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/arrowLeft"
+        android:layout_width="33dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:scaleX="-1"
+        app:layout_constraintStart_toStartOf="@+id/popupBg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar_next" />
+
+    <TableLayout
+        android:id="@+id/calendarTable"
+        android:layout_width="336dp"
+        android:layout_height="236dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:divider="@drawable/calendar_divider"
+        android:showDividers="middle"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="@+id/popupBg"
+        app:layout_constraintEnd_toEndOf="@id/popupBg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/popupBg"
+        app:layout_constraintTop_toTopOf="@+id/popupBg"
+        app:layout_constraintVertical_bias="0.645">
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center">
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="ПН" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="ВТ" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="СР" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="ЧТ" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="ПТ" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="СБ" />
+
+            <TextView
+                style="@style/CalendarDayHeader"
+                android:text="ВС" />
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

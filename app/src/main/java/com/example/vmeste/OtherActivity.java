@@ -1,8 +1,11 @@
 package com.example.vmeste;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,15 @@ public class OtherActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            );
+        }
+
 
         notificationsBtn = findViewById(R.id.notificationsButton);
         doneTasksBtn = findViewById(R.id.tasksButton);
@@ -50,7 +62,7 @@ public class OtherActivity extends BaseActivity {
         botBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OtherActivity.this, ChatActivity.class);
+                Intent intent = new Intent(OtherActivity.this, ChatBotActivity.class);
                 startActivity(intent);
             }
         });

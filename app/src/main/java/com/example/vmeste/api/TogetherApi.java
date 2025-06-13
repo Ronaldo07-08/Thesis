@@ -7,7 +7,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Header;
 
 public interface TogetherApi {
-
     @Headers({"Content-Type: application/json"})
     @POST("chat/completions")
     Call<ChatCompletionResponse> getChatCompletion(

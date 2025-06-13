@@ -1,7 +1,10 @@
 package com.example.vmeste;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -39,7 +42,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);  // Установка макета через BaseActivity
+
+        // Прозрачная навигационная панель
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            );
+        }
 
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
@@ -48,7 +60,7 @@ public class MainActivity extends BaseActivity {
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Инициализация адаптера с передачей taskDao
-        adapter = new TaskAdapter(taskViewModel.getAllTasks().getValue(), taskViewModel.getTaskDao());
+        adapter = new TaskAdapter(this, taskViewModel.getAllTasks().getValue(), taskViewModel.getTaskDao());
         tasksRecyclerView.setAdapter(adapter);
 
         // Подписка на изменения LiveData

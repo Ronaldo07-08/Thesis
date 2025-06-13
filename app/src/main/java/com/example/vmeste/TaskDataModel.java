@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Objects;
-
 @Entity(tableName = "tasks")
 public class TaskDataModel {
     @PrimaryKey(autoGenerate = true)
@@ -20,98 +18,74 @@ public class TaskDataModel {
     @ColumnInfo(name = "is_completed")
     private boolean isCompleted;
 
-    @ColumnInfo(name = "comments_count") // Добавим аннотацию для ясности
+    @ColumnInfo(name = "comments_count")
     private int commentsCount;
 
-    // Конструктор
+    @ColumnInfo(name = "importance")
+    private int importance = 1;
+
+    @ColumnInfo(name = "complexity")
+    private int complexity = 1;
+
+    @ColumnInfo(name = "base_time")
+    private int baseTime = 30;
+
+    @ColumnInfo(name = "priority")
+    private float priority = 0;
+
     public TaskDataModel(String title, String description) {
         this.title = title;
         this.description = description;
-        this.isCompleted = false;
-        this.commentsCount = 0; // Изначально 0 комментариев
     }
 
-    // Геттер для id
-    public int getId() {
-        return id;
+    // Геттеры и сеттеры
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public boolean isCompleted() { return isCompleted; }
+    public void setCompleted(boolean completed) { isCompleted = completed; }
+
+    public int getCommentsCount() { return commentsCount; }
+    public void setCommentsCount(int commentsCount) { this.commentsCount = commentsCount; }
+
+    public int getImportance() { return importance; }
+    public void setImportance(int importance) {
+        this.importance = Math.max(1, Math.min(3, importance));
     }
 
-    // Сеттер для id
-    public void setId(int id) {
-        this.id = id;
+    public int getComplexity() { return complexity; }
+    public void setComplexity(int complexity) {
+        this.complexity = Math.max(1, Math.min(5, complexity));
     }
 
-    // Геттер для названия задачи
-    public String getTitle() {
-        return title;
+    public int getBaseTime() { return baseTime; }
+    public void setBaseTime(int baseTime) { this.baseTime = baseTime; }
+
+    public float getPriority() { return priority; }
+    public void setPriority(float priority) { this.priority = priority; }
+
+    // Метод для расчета приоритета
+    public void calculatePriority(int userSkillLevel) {
+        double complexityFactor = 0.5 + (complexity * 0.25);
+        double skillMultiplier = getSkillMultiplier(userSkillLevel);
+        double finalTime = baseTime * (complexityFactor / skillMultiplier);
+        this.priority = (float) (importance / (complexity * 0.5 + finalTime * 0.2));
     }
 
-    // Сеттер для названия задачи
-    public void setTitle(String title) {
-        if (title == null || title.trim().isEmpty()) {
-            throw new IllegalArgumentException("Название задачи не может быть пустым");
+    private double getSkillMultiplier(int skillLevel) {
+        switch (skillLevel) {
+            case 1: return 0.333;
+            case 2: return 0.5;
+            case 3: return 1.0;
+            case 4: return 1.428;
+            case 5: return 2.0;
+            default: return 1.0;
         }
-        this.title = title;
-    }
-
-    // Геттер для описания
-    public String getDescription() {
-        return description;
-    }
-
-    // Сеттер для описания (если нужно)
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    // Геттер для статуса выполнения
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    // Сеттер для статуса выполнения
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    // Геттер для количества комментариев
-    public int getCommentsCount() {
-        return commentsCount;
-    }
-
-    // Сеттер для количества комментариев
-    public void setCommentsCount(int commentsCount) {
-        this.commentsCount = commentsCount;
-    }
-
-    public boolean isNew() {
-        return id == 0; // ID автоматически генерируется, поэтому 0 означает новую задачу
-    }
-
-    // Метод для добавления комментария
-    public void addComment() {
-        commentsCount++;
-    }
-
-    // Метод для удаления комментария
-    public void removeComment() {
-        if (commentsCount > 0) {
-            commentsCount--;
-        }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TaskDataModel task = (TaskDataModel) o;
-        return id == task.id &&
-                isCompleted == task.isCompleted &&
-                Objects.equals(title, task.title) &&
-                Objects.equals(description, task.description);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
