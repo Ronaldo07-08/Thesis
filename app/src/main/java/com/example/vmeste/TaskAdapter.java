@@ -118,6 +118,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             timeToTask = itemView.findViewById(R.id.timeToTask);
             pointerBtn = itemView.findViewById(R.id.otherToDoWTask);
 
+            setupClickListeners();
 
             pointerBtn.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -308,7 +309,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             double skillMultiplier = getSkillMultiplier(skillLevel);
             return baseTime * (complexityFactor / skillMultiplier);
         }
-
 
         private double getSkillMultiplier(int skillLevel) {
             switch (skillLevel) {

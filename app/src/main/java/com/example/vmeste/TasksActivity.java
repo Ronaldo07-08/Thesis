@@ -266,7 +266,9 @@ public class TasksActivity extends BaseActivity {
 
             // Если это последняя строка и дней меньше 7
             if (daysToAdd < 7) {
-                currentRow.setWeightSum(0); // Отключаем растягивание
+                for (int i = 0; i < 7 - daysToAdd; i++) {
+                    currentRow.addView(createEmptyDayView());
+                }
             }
 
             table.addView(currentRow);
@@ -298,12 +300,10 @@ public class TasksActivity extends BaseActivity {
     private TextView createDayView(int day, int year, int month) {
         TextView dayView = new TextView(this);
 
-        // Используем вес 1 для всех дней, кроме последней строки
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                0, // 0 означает использование веса
+                0,
                 TableRow.LayoutParams.WRAP_CONTENT,
-                1f); // Вес 1
-
+                1f);
         params.setMargins(4, 4, 4, 4);
         dayView.setLayoutParams(params);
 
@@ -312,14 +312,62 @@ public class TasksActivity extends BaseActivity {
         dayView.setTextColor(Color.BLACK);
         dayView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
-        // Обработчик клика
+        // Проверяем, является ли этот день текущим выбранным днем
+        Calendar selectedDate = Calendar.getInstance();
+        selectedDate.set(currentYear, currentMonth, currentDay);
+
+        Calendar thisDate = Calendar.getInstance();
+        thisDate.set(year, month, day);
+
+        if (selectedDate.get(Calendar.YEAR) == thisDate.get(Calendar.YEAR) &&
+                selectedDate.get(Calendar.MONTH) == thisDate.get(Calendar.MONTH) &&
+                selectedDate.get(Calendar.DAY_OF_MONTH) == thisDate.get(Calendar.DAY_OF_MONTH)) {
+            dayView.setBackgroundResource(R.drawable.calendar_ellipse_curr);
+        }
+
         dayView.setOnClickListener(v -> {
+            // Обновляем текущую дату
             currentDay = day;
             currentMonth = month;
             currentYear = year;
             saveCurrentDate();
-            updateDays(0);
-            ((PopupWindow) ((View) v.getParent().getParent().getParent()).getParent()).dismiss();
+
+            // Закрываем popup - новый способ
+            View rootView = (View) v.getRootView();
+            PopupWindow popupWindow = null;
+
+            // Ищем PopupWindow в иерархии View
+            if (rootView.getParent() instanceof PopupWindow) {
+                popupWindow = (PopupWindow) rootView.getParent();
+            } else if (rootView.getParent() instanceof ViewGroup) {
+                ViewGroup parent = (ViewGroup) rootView.getParent();
+                if (parent.getParent() instanceof PopupWindow) {
+                    popupWindow = (PopupWindow) parent.getParent();
+                }
+            }
+
+            if (popupWindow != null && popupWindow.isShowing()) {
+                popupWindow.dismiss();
+            }
+
+            // Полностью пересчитываем отображаемые дни
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(currentYear, currentMonth, currentDay);
+
+            // Обновляем интерфейс
+            for (int i = 0; i < 5; i++) {
+                Calendar dayCalendar = (Calendar) calendar.clone();
+                dayCalendar.add(Calendar.DAY_OF_MONTH, i - 2); // Центрируем выбранный день
+
+                int displayDay = dayCalendar.get(Calendar.DAY_OF_MONTH);
+                dayTextViews[i].setText(String.valueOf(displayDay));
+
+                if (i == 2) {
+                    dayButtons[i].setImageResource(R.drawable.calendar_ellipse_curr);
+                } else {
+                    dayButtons[i].setImageResource(R.drawable.calendar_ellipse);
+                }
+            }
         });
 
         return dayView;
