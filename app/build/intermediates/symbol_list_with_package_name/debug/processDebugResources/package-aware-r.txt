@@ -3384,8 +3384,6 @@ id escape
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id export
-id exportButton
 id fade
 id fill
 id fill_horizontal
@@ -3598,8 +3596,6 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
-id recomendations
-id recomendationsButton
 id rectangles
 id recycler_view_messages
 id report_drawn
@@ -3671,7 +3667,6 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
-id subtasks
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions

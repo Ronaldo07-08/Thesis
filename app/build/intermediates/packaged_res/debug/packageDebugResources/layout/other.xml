@@ -42,6 +42,8 @@
         android:text="Nickname"
         android:textColor="@color/black"
         android:textSize="27dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintStart_toStartOf="@+id/other"
         app:layout_constraintTop_toBottomOf="@+id/other" />
 
@@ -132,7 +134,7 @@
 
 
         <ImageButton
-            android:id="@+id/exportButton"
+            android:id="@+id/botChatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -142,43 +144,6 @@
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tasksButton" />
-
-        <ImageView
-            android:id="@+id/export"
-            android:layout_width="33dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:src="@drawable/archive"
-            app:layout_constraintEnd_toEndOf="@+id/exportButton"
-            app:layout_constraintTop_toTopOf="@+id/exportButton" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/jost"
-            android:gravity="top"
-            android:text="Экспорт расписания"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/exportButton"
-            app:layout_constraintStart_toStartOf="@+id/exportButton"
-            app:layout_constraintTop_toTopOf="@+id/exportButton" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/botChatButton"
-            android:background="@color/beige"
-            android:src="@drawable/widerect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exportButton"
-            android:layout_marginTop="32dp"
-            />
 
         <TextView
             android:layout_width="wrap_content"

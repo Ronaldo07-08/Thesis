@@ -405,11 +405,13 @@ public class TasksActivity extends BaseActivity {
     private TextView createDayView(int day, int year, int month) {
         TextView dayView = new TextView(this);
 
+        // Используем вес для всех ячеек
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                0,
+                0, // 0 означает использование веса
                 TableRow.LayoutParams.WRAP_CONTENT,
-                1f);
-        params.setMargins(4, 4, 4, 4);
+                1f); // Вес 1 для всех ячеек
+
+        params.setMargins(4, 3, 4, 4);
         dayView.setLayoutParams(params);
 
         dayView.setGravity(Gravity.CENTER);
@@ -417,15 +419,14 @@ public class TasksActivity extends BaseActivity {
         dayView.setTextColor(Color.BLACK);
         dayView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
+        // Обработчик клика
         dayView.setOnClickListener(v -> {
             currentDay = day;
             currentMonth = month;
             currentYear = year;
             saveCurrentDate();
             updateDays(0);
-
-            // Закрываем PopupWindow через сохраненную ссылку
-            if (calendarPopupWindow != null && calendarPopupWindow.isShowing()) {
+            if (calendarPopupWindow != null) {
                 calendarPopupWindow.dismiss();
             }
         });
@@ -485,9 +486,9 @@ public class TasksActivity extends BaseActivity {
                 dayCounter++;
             }
 
-            // Если это последняя строка и дней меньше 7
-            if (daysToAdd < 7) {
-                currentRow.setWeightSum(0); // Отключаем растягивание
+            // Добавляем пустые ячейки, если дней меньше 7
+            for (int i = daysToAdd; i < 7; i++) {
+                currentRow.addView(createEmptyDayView());
             }
 
             table.addView(currentRow);
@@ -499,18 +500,19 @@ public class TasksActivity extends BaseActivity {
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
                 TableRow.LayoutParams.WRAP_CONTENT);
-        params.setMargins(0, 8, 0, 8); // Добавляем отступы между строками
+        params.setMargins(0, 8, 0, 8);
         row.setLayoutParams(params);
-        row.setGravity(Gravity.CENTER);
+        row.setGravity(Gravity.CENTER); // Центрируем содержимое строки
         return row;
     }
 
     private TextView createEmptyDayView() {
         TextView view = new TextView(this);
         TableRow.LayoutParams params = new TableRow.LayoutParams(
+                0, // Используем вес для равномерного распределения
                 TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
-        params.setMargins(8, 8, 8, 8);
+                1f); // Вес 1 для всех ячеек
+        params.setMargins(4, 4, 4, 4);
         view.setLayoutParams(params);
         view.setText("");
         return view;

@@ -94,8 +94,6 @@ id deleteTask
 id descriptionEditText
 id descriptionInputLayout
 id edit_text_message
-id export
-id exportButton
 id headerLine
 id home
 id imageView
@@ -132,11 +130,8 @@ id popupBg
 id popupCalendar
 id popupClose
 id popupMonth
-id recomendations
-id recomendationsButton
 id recycler_view_messages
 id saveButton
-id subtasks
 id taskButton
 id taskCheckbox
 id tasks

@@ -60,7 +60,6 @@ public class NotificationsActivity extends BaseActivity {
 
         motivationButton = findViewById(R.id.motivationButton);
         DedlinesButton = findViewById(R.id.DedlinesButton);
-        recomendationsButton = findViewById(R.id.recomendationsButton);
         pointerButton = findViewById(R.id.pointer);
 
         loadSwitchStates();
@@ -91,16 +90,6 @@ public class NotificationsActivity extends BaseActivity {
                 cancelNotification(DEADLINES_ID);
             }
             showToast("Уведомления о дедлайнах " + (isChecked ? "включены" : "выключены"));
-        });
-
-        recomendationsButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            saveSwitchState(RECOMMENDATIONS_KEY, isChecked);
-            if (isChecked) {
-                scheduleNotification(RECOMMENDATIONS_ID, 12, 0, "Рекомендации", "Новые материалы для изучения");
-            } else {
-                cancelNotification(RECOMMENDATIONS_ID);
-            }
-            showToast("Рекомендации " + (isChecked ? "включены" : "выключены"));
         });
     }
 
@@ -207,7 +196,6 @@ public class NotificationsActivity extends BaseActivity {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         motivationButton.setChecked(prefs.getBoolean(MOTIVATION_KEY, false));
         DedlinesButton.setChecked(prefs.getBoolean(DEADLINES_KEY, false));
-        recomendationsButton.setChecked(prefs.getBoolean(RECOMMENDATIONS_KEY, false));
     }
 
     private void saveSwitchState(String key, boolean value) {

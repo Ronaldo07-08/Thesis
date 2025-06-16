@@ -117,37 +117,6 @@
             app:layout_constraintVertical_bias="0.578"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <ImageView
-            android:id="@+id/recomendations"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@color/beige"
-            android:src="@drawable/widerect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/deadlines" />
-
-        <Switch
-            android:id="@+id/recomendationsButton"
-            android:layout_width="326dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/white"
-            android:fontFamily="@font/jost"
-            android:switchPadding="98dp"
-            android:text="Рекомендации"
-            android:textAlignment="center"
-            android:textSize="25dp"
-            android:thumb="@drawable/switch_thumb"
-            android:track="@drawable/switch_track"
-            app:layout_constraintBottom_toBottomOf="@+id/recomendations"
-            app:layout_constraintStart_toStartOf="@+id/recomendations"
-            app:layout_constraintTop_toTopOf="@+id/recomendations"
-            app:layout_constraintVertical_bias="0.578"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
