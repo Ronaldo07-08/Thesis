@@ -54,6 +54,15 @@ public class MainActivity extends BaseActivity {
             );
         }
 
+        // Проверка первого запуска
+        AppPreferences appPrefs = new AppPreferences(this);
+        if (appPrefs.isFirstRun()) {
+            appPrefs.setFirstRun(false); // Устанавливаем флаг, что первый запуск уже был
+            startActivity(new Intent(this, ChatBotActivity.class));
+            finish(); // Закрываем MainActivity, чтобы пользователь не мог вернуться к ней кнопкой "Назад"
+            return;
+        }
+
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
         // Инициализация RecyclerView

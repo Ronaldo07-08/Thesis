@@ -1,5 +1,6 @@
 package com.example.vmeste;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -204,6 +205,14 @@ public class ChatBotActivity extends AppCompatActivity {
                         "Ваш уровень навыков: %d",
                 correctAnswers, totalQuestions, skillLevel);
         addMessage(result, true);
+
+        // Задержка перед переходом на MainActivity (чтобы пользователь успел увидеть результаты)
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(ChatBotActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish(); // Закрываем текущую активность
+        }, 2500); // 2.5 секунды задержки
     }
 
     private void addMessage(String text, boolean isBot) {
