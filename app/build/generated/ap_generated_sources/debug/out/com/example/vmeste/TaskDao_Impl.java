@@ -36,7 +36,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__insertionAdapterOfTaskDataModel = new EntityInsertionAdapter<TaskDataModel>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR ABORT INTO `tasks` (`id`,`title`,`description`,`is_completed`,`comments_count`,`importance`,`complexity`,`base_time`,`priority`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?)";
+        return "INSERT OR ABORT INTO `tasks` (`id`,`title`,`date`,`description`,`is_completed`,`comments_count`,`importance`,`complexity`,`base_time`,`priority`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -47,18 +47,23 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(2, value.getTitle());
         }
-        if (value.getDescription() == null) {
+        if (value.getDate() == null) {
           stmt.bindNull(3);
         } else {
-          stmt.bindString(3, value.getDescription());
+          stmt.bindString(3, value.getDate());
+        }
+        if (value.getDescription() == null) {
+          stmt.bindNull(4);
+        } else {
+          stmt.bindString(4, value.getDescription());
         }
         final int _tmp = value.isCompleted() ? 1 : 0;
-        stmt.bindLong(4, _tmp);
-        stmt.bindLong(5, value.getCommentsCount());
-        stmt.bindLong(6, value.getImportance());
-        stmt.bindLong(7, value.getComplexity());
-        stmt.bindLong(8, value.getBaseTime());
-        stmt.bindDouble(9, value.getPriority());
+        stmt.bindLong(5, _tmp);
+        stmt.bindLong(6, value.getCommentsCount());
+        stmt.bindLong(7, value.getImportance());
+        stmt.bindLong(8, value.getComplexity());
+        stmt.bindLong(9, value.getBaseTime());
+        stmt.bindDouble(10, value.getPriority());
       }
     };
     this.__deletionAdapterOfTaskDataModel = new EntityDeletionOrUpdateAdapter<TaskDataModel>(__db) {
@@ -75,7 +80,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__updateAdapterOfTaskDataModel = new EntityDeletionOrUpdateAdapter<TaskDataModel>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `tasks` SET `id` = ?,`title` = ?,`description` = ?,`is_completed` = ?,`comments_count` = ?,`importance` = ?,`complexity` = ?,`base_time` = ?,`priority` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `tasks` SET `id` = ?,`title` = ?,`date` = ?,`description` = ?,`is_completed` = ?,`comments_count` = ?,`importance` = ?,`complexity` = ?,`base_time` = ?,`priority` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -86,19 +91,24 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(2, value.getTitle());
         }
-        if (value.getDescription() == null) {
+        if (value.getDate() == null) {
           stmt.bindNull(3);
         } else {
-          stmt.bindString(3, value.getDescription());
+          stmt.bindString(3, value.getDate());
+        }
+        if (value.getDescription() == null) {
+          stmt.bindNull(4);
+        } else {
+          stmt.bindString(4, value.getDescription());
         }
         final int _tmp = value.isCompleted() ? 1 : 0;
-        stmt.bindLong(4, _tmp);
-        stmt.bindLong(5, value.getCommentsCount());
-        stmt.bindLong(6, value.getImportance());
-        stmt.bindLong(7, value.getComplexity());
-        stmt.bindLong(8, value.getBaseTime());
-        stmt.bindDouble(9, value.getPriority());
-        stmt.bindLong(10, value.getId());
+        stmt.bindLong(5, _tmp);
+        stmt.bindLong(6, value.getCommentsCount());
+        stmt.bindLong(7, value.getImportance());
+        stmt.bindLong(8, value.getComplexity());
+        stmt.bindLong(9, value.getBaseTime());
+        stmt.bindDouble(10, value.getPriority());
+        stmt.bindLong(11, value.getId());
       }
     };
   }
@@ -150,6 +160,7 @@ public final class TaskDao_Impl implements TaskDao {
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
           final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
           final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
@@ -176,6 +187,13 @@ public final class TaskDao_Impl implements TaskDao {
             final int _tmpId;
             _tmpId = _cursor.getInt(_cursorIndexOfId);
             _item.setId(_tmpId);
+            final String _tmpDate;
+            if (_cursor.isNull(_cursorIndexOfDate)) {
+              _tmpDate = null;
+            } else {
+              _tmpDate = _cursor.getString(_cursorIndexOfDate);
+            }
+            _item.setDate(_tmpDate);
             final boolean _tmpIsCompleted;
             final int _tmp;
             _tmp = _cursor.getInt(_cursorIndexOfIsCompleted);
@@ -222,6 +240,7 @@ public final class TaskDao_Impl implements TaskDao {
     try {
       final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
       final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+      final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
       final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
       final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
       final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
@@ -247,6 +266,13 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmpId;
         _tmpId = _cursor.getInt(_cursorIndexOfId);
         _result.setId(_tmpId);
+        final String _tmpDate;
+        if (_cursor.isNull(_cursorIndexOfDate)) {
+          _tmpDate = null;
+        } else {
+          _tmpDate = _cursor.getString(_cursorIndexOfDate);
+        }
+        _result.setDate(_tmpDate);
         final boolean _tmpIsCompleted;
         final int _tmp;
         _tmp = _cursor.getInt(_cursorIndexOfIsCompleted);
@@ -275,6 +301,250 @@ public final class TaskDao_Impl implements TaskDao {
       _cursor.close();
       _statement.release();
     }
+  }
+
+  @Override
+  public LiveData<List<TaskDataModel>> getTasksByDate(final String date) {
+    final String _sql = "SELECT * FROM tasks WHERE date = ? ORDER BY priority DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (date == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, date);
+    }
+    return __db.getInvalidationTracker().createLiveData(new String[]{"tasks"}, false, new Callable<List<TaskDataModel>>() {
+      @Override
+      public List<TaskDataModel> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
+          final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
+          final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
+          final int _cursorIndexOfComplexity = CursorUtil.getColumnIndexOrThrow(_cursor, "complexity");
+          final int _cursorIndexOfBaseTime = CursorUtil.getColumnIndexOrThrow(_cursor, "base_time");
+          final int _cursorIndexOfPriority = CursorUtil.getColumnIndexOrThrow(_cursor, "priority");
+          final List<TaskDataModel> _result = new ArrayList<TaskDataModel>(_cursor.getCount());
+          while(_cursor.moveToNext()) {
+            final TaskDataModel _item;
+            final String _tmpTitle;
+            if (_cursor.isNull(_cursorIndexOfTitle)) {
+              _tmpTitle = null;
+            } else {
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+            }
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new TaskDataModel(_tmpTitle,_tmpDescription);
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            _item.setId(_tmpId);
+            final String _tmpDate;
+            if (_cursor.isNull(_cursorIndexOfDate)) {
+              _tmpDate = null;
+            } else {
+              _tmpDate = _cursor.getString(_cursorIndexOfDate);
+            }
+            _item.setDate(_tmpDate);
+            final boolean _tmpIsCompleted;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsCompleted);
+            _tmpIsCompleted = _tmp != 0;
+            _item.setCompleted(_tmpIsCompleted);
+            final int _tmpCommentsCount;
+            _tmpCommentsCount = _cursor.getInt(_cursorIndexOfCommentsCount);
+            _item.setCommentsCount(_tmpCommentsCount);
+            final int _tmpImportance;
+            _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+            _item.setImportance(_tmpImportance);
+            final int _tmpComplexity;
+            _tmpComplexity = _cursor.getInt(_cursorIndexOfComplexity);
+            _item.setComplexity(_tmpComplexity);
+            final int _tmpBaseTime;
+            _tmpBaseTime = _cursor.getInt(_cursorIndexOfBaseTime);
+            _item.setBaseTime(_tmpBaseTime);
+            final float _tmpPriority;
+            _tmpPriority = _cursor.getFloat(_cursorIndexOfPriority);
+            _item.setPriority(_tmpPriority);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public List<TaskDataModel> getTasksByDateSync(final String date) {
+    final String _sql = "SELECT * FROM tasks WHERE date = ? ORDER BY priority DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    if (date == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, date);
+    }
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+      final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+      final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+      final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+      final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
+      final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
+      final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
+      final int _cursorIndexOfComplexity = CursorUtil.getColumnIndexOrThrow(_cursor, "complexity");
+      final int _cursorIndexOfBaseTime = CursorUtil.getColumnIndexOrThrow(_cursor, "base_time");
+      final int _cursorIndexOfPriority = CursorUtil.getColumnIndexOrThrow(_cursor, "priority");
+      final List<TaskDataModel> _result = new ArrayList<TaskDataModel>(_cursor.getCount());
+      while(_cursor.moveToNext()) {
+        final TaskDataModel _item;
+        final String _tmpTitle;
+        if (_cursor.isNull(_cursorIndexOfTitle)) {
+          _tmpTitle = null;
+        } else {
+          _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+        }
+        final String _tmpDescription;
+        if (_cursor.isNull(_cursorIndexOfDescription)) {
+          _tmpDescription = null;
+        } else {
+          _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+        }
+        _item = new TaskDataModel(_tmpTitle,_tmpDescription);
+        final int _tmpId;
+        _tmpId = _cursor.getInt(_cursorIndexOfId);
+        _item.setId(_tmpId);
+        final String _tmpDate;
+        if (_cursor.isNull(_cursorIndexOfDate)) {
+          _tmpDate = null;
+        } else {
+          _tmpDate = _cursor.getString(_cursorIndexOfDate);
+        }
+        _item.setDate(_tmpDate);
+        final boolean _tmpIsCompleted;
+        final int _tmp;
+        _tmp = _cursor.getInt(_cursorIndexOfIsCompleted);
+        _tmpIsCompleted = _tmp != 0;
+        _item.setCompleted(_tmpIsCompleted);
+        final int _tmpCommentsCount;
+        _tmpCommentsCount = _cursor.getInt(_cursorIndexOfCommentsCount);
+        _item.setCommentsCount(_tmpCommentsCount);
+        final int _tmpImportance;
+        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        _item.setImportance(_tmpImportance);
+        final int _tmpComplexity;
+        _tmpComplexity = _cursor.getInt(_cursorIndexOfComplexity);
+        _item.setComplexity(_tmpComplexity);
+        final int _tmpBaseTime;
+        _tmpBaseTime = _cursor.getInt(_cursorIndexOfBaseTime);
+        _item.setBaseTime(_tmpBaseTime);
+        final float _tmpPriority;
+        _tmpPriority = _cursor.getFloat(_cursorIndexOfPriority);
+        _item.setPriority(_tmpPriority);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
+  public LiveData<List<TaskDataModel>> getCompletedTasks() {
+    final String _sql = "SELECT * FROM tasks WHERE is_completed = 1 ORDER BY date DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    return __db.getInvalidationTracker().createLiveData(new String[]{"tasks"}, false, new Callable<List<TaskDataModel>>() {
+      @Override
+      public List<TaskDataModel> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+          final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
+          final int _cursorIndexOfDescription = CursorUtil.getColumnIndexOrThrow(_cursor, "description");
+          final int _cursorIndexOfIsCompleted = CursorUtil.getColumnIndexOrThrow(_cursor, "is_completed");
+          final int _cursorIndexOfCommentsCount = CursorUtil.getColumnIndexOrThrow(_cursor, "comments_count");
+          final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
+          final int _cursorIndexOfComplexity = CursorUtil.getColumnIndexOrThrow(_cursor, "complexity");
+          final int _cursorIndexOfBaseTime = CursorUtil.getColumnIndexOrThrow(_cursor, "base_time");
+          final int _cursorIndexOfPriority = CursorUtil.getColumnIndexOrThrow(_cursor, "priority");
+          final List<TaskDataModel> _result = new ArrayList<TaskDataModel>(_cursor.getCount());
+          while(_cursor.moveToNext()) {
+            final TaskDataModel _item;
+            final String _tmpTitle;
+            if (_cursor.isNull(_cursorIndexOfTitle)) {
+              _tmpTitle = null;
+            } else {
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+            }
+            final String _tmpDescription;
+            if (_cursor.isNull(_cursorIndexOfDescription)) {
+              _tmpDescription = null;
+            } else {
+              _tmpDescription = _cursor.getString(_cursorIndexOfDescription);
+            }
+            _item = new TaskDataModel(_tmpTitle,_tmpDescription);
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
+            _item.setId(_tmpId);
+            final String _tmpDate;
+            if (_cursor.isNull(_cursorIndexOfDate)) {
+              _tmpDate = null;
+            } else {
+              _tmpDate = _cursor.getString(_cursorIndexOfDate);
+            }
+            _item.setDate(_tmpDate);
+            final boolean _tmpIsCompleted;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsCompleted);
+            _tmpIsCompleted = _tmp != 0;
+            _item.setCompleted(_tmpIsCompleted);
+            final int _tmpCommentsCount;
+            _tmpCommentsCount = _cursor.getInt(_cursorIndexOfCommentsCount);
+            _item.setCommentsCount(_tmpCommentsCount);
+            final int _tmpImportance;
+            _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+            _item.setImportance(_tmpImportance);
+            final int _tmpComplexity;
+            _tmpComplexity = _cursor.getInt(_cursorIndexOfComplexity);
+            _item.setComplexity(_tmpComplexity);
+            final int _tmpBaseTime;
+            _tmpBaseTime = _cursor.getInt(_cursorIndexOfBaseTime);
+            _item.setBaseTime(_tmpBaseTime);
+            final float _tmpPriority;
+            _tmpPriority = _cursor.getFloat(_cursorIndexOfPriority);
+            _item.setPriority(_tmpPriority);
+            _result.add(_item);
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
   }
 
   public static List<Class<?>> getRequiredConverters() {

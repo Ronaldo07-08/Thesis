@@ -117,7 +117,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             deleteTask = itemView.findViewById(R.id.deleteTask);
             timeToTask = itemView.findViewById(R.id.timeToTask);
             pointerBtn = itemView.findViewById(R.id.otherToDoWTask);
-
+            setupClickListeners();
 
             pointerBtn.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -126,7 +126,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     showPriorityDialog(task);
                 }
             });
-
             checkBox.setOnCheckedChangeListener(null);
         }
 

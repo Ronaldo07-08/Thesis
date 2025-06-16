@@ -3279,7 +3279,6 @@ id button_send
 id cache_measures
 id calculateButton
 id calendar
-id calendarRecyclerView
 id calendarTable
 id callMeasure
 id cancel_button
@@ -3305,6 +3304,7 @@ id close_button
 id closest
 id collapseActionView
 id commentsCount
+id completedTasksRecyclerView
 id compress
 id confirm_button
 id constraint
@@ -3332,6 +3332,8 @@ id day4
 id day4_text
 id day5
 id day5_text
+id dayAfterTomorrowDateTextView
+id dayAfterTomorrowRecyclerView
 id deadlines
 id decelerate
 id decelerateAndComplete
@@ -3722,8 +3724,12 @@ id titleDividerNoCustom
 id titleEditText
 id titleInputLayout
 id title_template
+id todayDateTextView
+id todayRecyclerView
 id toggle
 id toggleOptionsButton
+id tomorrowDateTextView
+id tomorrowRecyclerView
 id top
 id topLine
 id topPanel

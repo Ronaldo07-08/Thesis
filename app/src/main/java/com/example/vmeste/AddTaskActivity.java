@@ -1,6 +1,5 @@
 package com.example.vmeste;
 
-
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -9,10 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class AddTaskActivity extends AppCompatActivity {
     private TextInputEditText titleEditText;
     private TextInputEditText descriptionEditText;
     private int taskId = -1; // -1 означает новую задачу
+    private String taskDate; // Для хранения даты задачи
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,15 @@ public class AddTaskActivity extends AppCompatActivity {
 
         titleEditText = findViewById(R.id.titleEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
+
+        // Получаем дату из интента (если передана)
+        if (getIntent().hasExtra("task_date")) {
+            taskDate = getIntent().getStringExtra("task_date");
+        } else {
+            // Устанавливаем текущую дату по умолчанию
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            taskDate = sdf.format(new Date());
+        }
 
         // Проверяем, переданы ли данные задачи для редактирования
         if (getIntent().hasExtra("task_id")) {
@@ -42,6 +56,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 if (task != null) {
                     titleEditText.setText(task.getTitle());
                     descriptionEditText.setText(task.getDescription());
+                    taskDate = task.getDate(); // Сохраняем дату существующей задачи
                 }
             });
         });
@@ -57,6 +72,8 @@ public class AddTaskActivity extends AppCompatActivity {
         }
 
         TaskDataModel task = new TaskDataModel(title, description);
+        task.setDate(taskDate); // Устанавливаем дату задачи
+
         if (taskId != -1) {
             task.setId(taskId); // Для обновления существующей задачи
         }

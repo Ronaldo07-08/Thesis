@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -19,17 +18,16 @@ import java.util.Random;
 
 public class NotificationsActivity extends BaseActivity {
 
-    private static final String PREFS_NAME = "NotificationPrefs";
-    private static final String MOTIVATION_KEY = "motivation_enabled";
-    private static final String DEADLINES_KEY = "deadlines_enabled";
-    private static final String RECOMMENDATIONS_KEY = "recommendations_enabled";
+    static final String PREFS_NAME = "NotificationPrefs";
+    static final String MOTIVATION_KEY = "motivation_enabled";
+    static final String DEADLINES_KEY = "deadlines_enabled";
+    static final String RECOMMENDATIONS_KEY = "recommendations_enabled";
 
-    private static final int MOTIVATION_ID = 1;
-    private static final int DEADLINES_ID = 2;
-    private static final int RECOMMENDATIONS_ID = 3;
+    static final int MOTIVATION_ID = 1;
+    static final int DEADLINES_ID = 2;
+    static final int RECOMMENDATIONS_ID = 3;
 
-
-    private Switch motivationButton, DedlinesButton, recomendationsButton; // Ваши переключатели из layout
+    private Switch motivationButton, DedlinesButton, recomendationsButton;
     private ImageButton pointerButton;
     private AlarmManager alarmManager;
 
@@ -60,16 +58,12 @@ public class NotificationsActivity extends BaseActivity {
 
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        // Инициализация переключателей (используем ваши ID из layout)
         motivationButton = findViewById(R.id.motivationButton);
         DedlinesButton = findViewById(R.id.DedlinesButton);
         recomendationsButton = findViewById(R.id.recomendationsButton);
         pointerButton = findViewById(R.id.pointer);
 
-        // Загрузка сохраненных состояний
         loadSwitchStates();
-
-        // Настройка обработчиков
         setupSwitches();
 
         pointerButton.setOnClickListener(v -> {
@@ -79,7 +73,6 @@ public class NotificationsActivity extends BaseActivity {
     }
 
     private void setupSwitches() {
-        // Обработчик для мотивационных уведомлений
         motivationButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveSwitchState(MOTIVATION_KEY, isChecked);
             if (isChecked) {
@@ -90,19 +83,16 @@ public class NotificationsActivity extends BaseActivity {
             showToast("Мотивационные уведомления " + (isChecked ? "включены" : "выключены"));
         });
 
-        // Обработчик для уведомлений о дедлайнах
         DedlinesButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveSwitchState(DEADLINES_KEY, isChecked);
             if (isChecked) {
-                scheduleNotification(DEADLINES_ID, 18, 0, "Дедлайны", "Проверьте задания с приближающимися сроками");
+                scheduleDeadlineNotifications();
             } else {
                 cancelNotification(DEADLINES_ID);
             }
             showToast("Уведомления о дедлайнах " + (isChecked ? "включены" : "выключены"));
         });
 
-
-        // Обработчик для рекомендаций
         recomendationsButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             saveSwitchState(RECOMMENDATIONS_KEY, isChecked);
             if (isChecked) {
@@ -115,10 +105,7 @@ public class NotificationsActivity extends BaseActivity {
     }
 
     private void scheduleMotivationalNotifications() {
-        // Отменяем предыдущие уведомления
         cancelNotification(MOTIVATION_ID);
-
-        // Планируем первое уведомление через 1 минуту
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, 1);
 
@@ -133,15 +120,46 @@ public class NotificationsActivity extends BaseActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
-        // Устанавливаем повтор каждую минуту
         alarmManager.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(),
-                60 * 1000, // Интервал 1 минута (в миллисекундах)
+                60 * 1000,
                 pendingIntent
         );
+    }
 
-        Log.d("NOTIFY_TEST", "Уведомления запланированы каждую минуту");
+    private void scheduleDeadlineNotifications() {
+        cancelNotification(DEADLINES_ID);
+
+        // Устанавливаем время срабатывания - 17:00
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Если время уже прошло сегодня, планируем на завтра
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        intent.putExtra("notification_id", DEADLINES_ID);
+        intent.putExtra("title", "Дедлайны");
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this,
+                DEADLINES_ID,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        // Устанавливаем ежедневное повторение
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
     }
 
     private void scheduleNotification(int id, int hour, int minute, String title, String message) {

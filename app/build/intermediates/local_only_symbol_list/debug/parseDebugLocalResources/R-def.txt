@@ -72,11 +72,11 @@ id bottom_menu
 id button_send
 id calculateButton
 id calendar
-id calendarRecyclerView
 id calendarTable
 id chatRecyclerView
 id close_button
 id commentsCount
+id completedTasksRecyclerView
 id day1
 id day1_text
 id day2
@@ -87,6 +87,8 @@ id day4
 id day4_text
 id day5
 id day5_text
+id dayAfterTomorrowDateTextView
+id dayAfterTomorrowRecyclerView
 id deadlines
 id deleteTask
 id descriptionEditText
@@ -152,7 +154,11 @@ id text_view_message_user
 id timeToTask
 id titleEditText
 id titleInputLayout
+id todayDateTextView
+id todayRecyclerView
 id toggleOptionsButton
+id tomorrowDateTextView
+id tomorrowRecyclerView
 id topLine
 layout activity_chat
 layout activity_main

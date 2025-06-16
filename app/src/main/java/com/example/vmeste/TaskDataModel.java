@@ -12,6 +12,9 @@ public class TaskDataModel {
     @ColumnInfo(name = "title")
     private String title;
 
+    @ColumnInfo(name = "date")
+    private String date; // Формат: "yyyy-MM-dd"
+
     @ColumnInfo(name = "description")
     private String description;
 
@@ -64,6 +67,8 @@ public class TaskDataModel {
         this.complexity = Math.max(1, Math.min(5, complexity));
     }
 
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
     public int getBaseTime() { return baseTime; }
     public void setBaseTime(int baseTime) { this.baseTime = baseTime; }
 

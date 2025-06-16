@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);  // Установка макета через BaseActivity
+        super.onCreate(savedInstanceState);
 
         // Прозрачная навигационная панель
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -59,14 +60,18 @@ public class MainActivity extends BaseActivity {
         RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Инициализация адаптера с передачей taskDao
-        adapter = new TaskAdapter(this, taskViewModel.getAllTasks().getValue(), taskViewModel.getTaskDao());
+        // Инициализация адаптера
+        adapter = new TaskAdapter(this, new ArrayList<>(), taskViewModel.getTaskDao());
         tasksRecyclerView.setAdapter(adapter);
 
-        // Подписка на изменения LiveData
-        taskViewModel.getAllTasks().observe(this, tasks -> {
-            adapter.setTasks(tasks);
-            updateTasksCount(tasks.size());
+        // Получаем текущую дату
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String today = sdf.format(new Date());
+
+        // Подписка на изменения задач на сегодня
+        taskViewModel.getTasksByDate(today).observe(this, tasks -> {
+            adapter.setTasks(tasks != null ? tasks : new ArrayList<>());
+            updateTasksCount(tasks != null ? tasks.size() : 0);
         });
 
         // Инициализация остальных элементов
@@ -78,6 +83,8 @@ public class MainActivity extends BaseActivity {
 
         addTaskBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
+            // Устанавливаем дату на сегодня по умолчанию
+            intent.putExtra("task_date", today);
             startActivityForResult(intent, ADD_TASK_REQUEST);
         });
     }
@@ -90,7 +97,12 @@ public class MainActivity extends BaseActivity {
             String title = data.getStringExtra("title");
             String description = data.getStringExtra("description");
 
+            // Создаем задачу с сегодняшней датой
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String today = sdf.format(new Date());
+
             TaskDataModel newTask = new TaskDataModel(title, description);
+            newTask.setDate(today);
             taskViewModel.insert(newTask);
         }
     }
