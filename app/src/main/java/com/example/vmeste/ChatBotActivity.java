@@ -22,6 +22,7 @@ import java.util.Locale;
 public class ChatBotActivity extends AppCompatActivity {
     private ImageButton toggleOptionsButton;
     private boolean areOptionsVisible = false;
+    private boolean isWelcomePhase = true;
     private RecyclerView chatRecyclerView;
     private LinearLayout answerOptionsContainer;
     private ChatAdapter adapter;
@@ -119,9 +120,50 @@ public class ChatBotActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messages);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(adapter);
-
         // Начало диалога
-        showNextQuestion();
+        startWelcomeDialog();
+    }
+
+    private void startWelcomeDialog() {
+        isWelcomePhase = true;
+        addMessage("Добро пожаловать в Thesis!", true);
+
+        new Handler().postDelayed(() -> {
+            addMessage("Сейчас я задам тебе несколько вопросов.", true);
+
+            new Handler().postDelayed(() -> {
+                addMessage("Это необходимо для выявления уровня твоих знаний!", true);
+
+                new Handler().postDelayed(() -> {
+                    // Создаем кнопку "Хорошо!" для пользователя
+                    answerOptionsContainer.removeAllViews();
+                    answerOptionsContainer.setVisibility(View.VISIBLE);
+
+                    Button okButton = new Button(this);
+                    okButton.setText("Хорошо!");
+                    okButton.setBackgroundResource(R.drawable.widerect);
+                    okButton.setTextColor(getResources().getColor(android.R.color.black));
+                    okButton.setPadding(32, 0, 32, 0);
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, 0, 0, 0);
+                    okButton.setLayoutParams(params);
+
+                    okButton.setOnClickListener(v -> {
+                        addMessage("Хорошо!", false);
+                        answerOptionsContainer.setVisibility(View.GONE);
+                        isWelcomePhase = false;
+                        // Начинаем тест после ответа пользователя
+                        showNextQuestion();
+                    });
+
+                    answerOptionsContainer.addView(okButton);
+                }, 1000); // Задержка перед третьим сообщением
+            }, 1000); // Задержка перед вторым сообщением
+        }, 1000); // Задержка перед первым сообщением
     }
 
     private void showNextQuestion() {
