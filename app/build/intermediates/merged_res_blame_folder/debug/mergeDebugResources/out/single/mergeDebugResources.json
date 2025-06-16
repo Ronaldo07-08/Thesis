@@ -4,24 +4,24 @@
         "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\dialog_background.xml"
     },
     {
-        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_switch_track.xml.flat",
-        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\switch_track.xml"
-    },
-    {
         "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xhdpi_ic_thesis.webp.flat",
         "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xhdpi\\ic_thesis.webp"
+    },
+    {
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_switch_track.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\switch_track.xml"
     },
     {
         "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_calendar_divider.xml.flat",
         "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\drawable\\calendar_divider.xml"
     },
     {
-        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\activity_main.xml"
+        "merged": "com.example.vmeste.app-debug-42:/layout_activity_main.xml.flat",
+        "source": "com.example.vmeste.app-main-44:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.vmeste.app-debug-42:/layout_menu_bottom.xml.flat",
-        "source": "com.example.vmeste.app-main-44:/layout/menu_bottom.xml"
+        "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\drawable_widerectorange.png.flat",
@@ -190,10 +190,6 @@
     {
         "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\mipmap-xhdpi_ic_thesis_round.webp.flat",
         "source": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-main-44:\\mipmap-xhdpi\\ic_thesis_round.webp"
-    },
-    {
-        "merged": "com.example.vmeste.app-debug-42:/drawable_pluscircle.png.flat",
-        "source": "com.example.vmeste.app-main-44:/drawable/pluscircle.png"
     },
     {
         "merged": "C:\\Users\\erken\\.gradle\\daemon\\8.11.1\\com.example.vmeste.app-debug-42:\\layout_popup_calendar.xml.flat",
