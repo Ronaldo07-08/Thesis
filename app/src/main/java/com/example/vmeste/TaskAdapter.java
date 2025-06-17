@@ -117,7 +117,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             deleteTask = itemView.findViewById(R.id.deleteTask);
             timeToTask = itemView.findViewById(R.id.timeToTask);
             pointerBtn = itemView.findViewById(R.id.otherToDoWTask);
-
             setupClickListeners();
 
             pointerBtn.setOnClickListener(v -> {
@@ -127,7 +126,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     showPriorityDialog(task);
                 }
             });
-
             checkBox.setOnCheckedChangeListener(null);
         }
 
@@ -310,6 +308,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             return baseTime * (complexityFactor / skillMultiplier);
         }
 
+
         private double getSkillMultiplier(int skillLevel) {
             switch (skillLevel) {
                 case 1: return 0.333;
@@ -330,17 +329,42 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         }
 
         private void estimateTaskTime(String title, String description, TimeEstimationCallback callback) {
-            String prompt = createPrompt(title, description);
-            ChatCompletionRequest request = createRequest(prompt);
+            String desc = (description != null && !description.isEmpty()) ? description : "нет описания";
+            String prompt = "Тщательно проанализируй название и описание задачи, чтобы точно оценить время выполнения и сложность.\n" +
+                    "Название: " + title + "\n" +
+                    "Подробное описание: " + desc + "\n\n" +
+                    "Учти все детали из описания при оценке.\n\n" +
+                    "Ответь строго в формате JSON: {\"base_time\": X, \"complexity\": Y} " +
+                    "где X - время в минутах (целое число), Y - сложность от 1 до 5 (целое число)";
+
+            List<Message> apiMessages = new ArrayList<>();
+            apiMessages.add(new Message("user", prompt));
+
+            ChatCompletionRequest request = new ChatCompletionRequest();
+            request.model = "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free";
+            request.messages = apiMessages;
             String apiKey = "Bearer " + context.getString(R.string.together_api_key);
 
             togetherApi.getChatCompletion(apiKey, request).enqueue(new Callback<ChatCompletionResponse>() {
                 @Override
                 public void onResponse(Call<ChatCompletionResponse> call, Response<ChatCompletionResponse> response) {
-                    if (response.isSuccessful()) {
-                        handleSuccessfulResponse(response, callback);
+                    if (response.isSuccessful() && response.body() != null) {
+                        try {
+                            String content = response.body().choices.get(0).message.content;
+                            String jsonString = extractJson(content);
+                            if (jsonString == null) {
+                                callback.onError("Не удалось извлечь JSON из ответа");
+                                return;
+                            }
+                            JSONObject json = new JSONObject(jsonString);
+                            int baseTime = json.getInt("base_time");
+                            int complexity = json.getInt("complexity");
+                            callback.onEstimated(baseTime, complexity);
+                        } catch (Exception e) {
+                            callback.onError("Ошибка парсинга ответа: " + e.getMessage());
+                        }
                     } else {
-                        handleApiError(response, callback);
+                        callback.onError("Ошибка API: " + response.code());
                     }
                 }
 
@@ -353,7 +377,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
         private String createPrompt(String title, String description) {
             return "Оцени время выполнения задачи и ее сложность. " +
-                    "Задача: " + title + "\nОписание: " + description + "\n\n" +
+                    "Задача: " + title + "\nОписание: " +
+                    (description != null && !description.isEmpty() ? description : "нет описания") + "\n\n" +
                     "Ответь строго в формате JSON: {\"base_time\": X, \"complexity\": Y} " +
                     "где X - время в минутах (только число), Y - сложность от 1 до 5 (только число)";
         }

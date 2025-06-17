@@ -36,12 +36,12 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(2) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(3) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `is_completed` INTEGER NOT NULL, `comments_count` INTEGER NOT NULL, `importance` INTEGER NOT NULL, `complexity` INTEGER NOT NULL, `base_time` INTEGER NOT NULL, `priority` REAL NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `date` TEXT, `description` TEXT, `is_completed` INTEGER NOT NULL, `comments_count` INTEGER NOT NULL, `importance` INTEGER NOT NULL, `complexity` INTEGER NOT NULL, `base_time` INTEGER NOT NULL, `priority` REAL NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f927f83edca16101b25f8fae122e2acb')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5abe7811a9bb9626cd9e2384c7391e2e')");
       }
 
       @Override
@@ -85,9 +85,10 @@ public final class AppDatabase_Impl extends AppDatabase {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsTasks = new HashMap<String, TableInfo.Column>(9);
+        final HashMap<String, TableInfo.Column> _columnsTasks = new HashMap<String, TableInfo.Column>(10);
         _columnsTasks.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTasks.put("title", new TableInfo.Column("title", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTasks.put("date", new TableInfo.Column("date", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTasks.put("description", new TableInfo.Column("description", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTasks.put("is_completed", new TableInfo.Column("is_completed", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTasks.put("comments_count", new TableInfo.Column("comments_count", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -106,7 +107,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "f927f83edca16101b25f8fae122e2acb", "e64d84c340adf2a6b18895223675772d");
+    }, "5abe7811a9bb9626cd9e2384c7391e2e", "2a1e6cec77ab769737798c070420d2aa");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

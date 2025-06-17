@@ -30,4 +30,8 @@ public class TaskViewModel extends AndroidViewModel {
     public void insert(TaskDataModel task) {
         AppDatabase.databaseWriteExecutor.execute(() -> taskDao.insert(task));
     }
+
+    public LiveData<List<TaskDataModel>> getTasksByDate(String date) {
+        return taskDao.getTasksByDate(date);
+    }
 }

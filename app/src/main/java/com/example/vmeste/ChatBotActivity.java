@@ -1,8 +1,12 @@
 package com.example.vmeste;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,6 +22,7 @@ import java.util.Locale;
 public class ChatBotActivity extends AppCompatActivity {
     private ImageButton toggleOptionsButton;
     private boolean areOptionsVisible = false;
+    private boolean isWelcomePhase = true;
     private RecyclerView chatRecyclerView;
     private LinearLayout answerOptionsContainer;
     private ChatAdapter adapter;
@@ -28,18 +33,53 @@ public class ChatBotActivity extends AppCompatActivity {
 
     private final Question[] questions = {
             new Question(
-                    "Какой язык программирования используется в Android?",
-                    new String[]{"Kotlin", "Java", "Python", "C++"},
+                    "Как объявить массив чисел?",
+                    new String[]{"int[]", "int array[]", "Array<int>", "new int()"},
                     0
             ),
             new Question(
-                    "Столица Франции?",
-                    new String[]{"Париж", "Лондон", "Берлин", "Мадрид"},
+                    "Как вывести текст в консоль?",
+                    new String[]{"Console.WriteLine", "System.out.println", "print()", "Console.Print"},
                     0
             ),
             new Question(
-                    "2 + 2 = ?",
-                    new String[]{"4", "5", "22", "0"},
+                    "Какой цикл работает пока условие true?",
+                    new String[]{"while", "for", "do...while", "loop"},
+                    0
+            ),
+            new Question(
+                    "Как создать список?",
+                    new String[]{"List<T>", "ArrayList", "new List[]", "Array<T>"},
+                    0
+            ),
+            new Question(
+                    "Как проверить равенство чисел?",
+                    new String[]{"==", ".equals()", "=", "==="},
+                    0
+            ),
+            new Question(
+                    "Как объявить константу?",
+                    new String[]{"const", "final", "readonly", "static"},
+                    0
+            ),
+            new Question(
+                    "Как преобразовать строку в число?",
+                    new String[]{"int.Parse", "Convert.ToInt", "ToInt()", "(int)string"},
+                    0
+            ),
+            new Question(
+                    "Какой метод возвращает длину строки?",
+                    new String[]{"Length", "size()", "count()", "len()"},
+                    0
+            ),
+            new Question(
+                    "Как остановить цикл?",
+                    new String[]{"break", "exit", "return", "stop"},
+                    0
+            ),
+            new Question(
+                    "Какой алгоритм сортировки самый медленный?",
+                    new String[]{"пузырьком", "Быстрая сортировка", "Сортировка вставками", "Сортировка выбором"},
                     0
             )
     };
@@ -48,6 +88,14 @@ public class ChatBotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_bot);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            );
+        }
 
         // Initialize views
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
@@ -72,9 +120,50 @@ public class ChatBotActivity extends AppCompatActivity {
         adapter = new ChatAdapter(messages);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(adapter);
-
         // Начало диалога
-        showNextQuestion();
+        startWelcomeDialog();
+    }
+
+    private void startWelcomeDialog() {
+        isWelcomePhase = true;
+        addMessage("Добро пожаловать в Thesis!", true);
+
+        new Handler().postDelayed(() -> {
+            addMessage("Сейчас я задам тебе несколько вопросов.", true);
+
+            new Handler().postDelayed(() -> {
+                addMessage("Это необходимо для выявления уровня твоих знаний!", true);
+
+                new Handler().postDelayed(() -> {
+                    // Создаем кнопку "Хорошо!" для пользователя
+                    answerOptionsContainer.removeAllViews();
+                    answerOptionsContainer.setVisibility(View.VISIBLE);
+
+                    Button okButton = new Button(this);
+                    okButton.setText("Хорошо!");
+                    okButton.setBackgroundResource(R.drawable.widerect);
+                    okButton.setTextColor(getResources().getColor(android.R.color.black));
+                    okButton.setPadding(32, 0, 32, 0);
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, 0, 0, 0);
+                    okButton.setLayoutParams(params);
+
+                    okButton.setOnClickListener(v -> {
+                        addMessage("Хорошо!", false);
+                        answerOptionsContainer.setVisibility(View.GONE);
+                        isWelcomePhase = false;
+                        // Начинаем тест после ответа пользователя
+                        showNextQuestion();
+                    });
+
+                    answerOptionsContainer.addView(okButton);
+                }, 1000); // Задержка перед третьим сообщением
+            }, 1000); // Задержка перед вторым сообщением
+        }, 1000); // Задержка перед первым сообщением
     }
 
     private void showNextQuestion() {
@@ -145,11 +234,11 @@ public class ChatBotActivity extends AppCompatActivity {
 
         // Определяем уровень навыков
         int skillLevel;
-        if (correctAnswers >= 9) skillLevel = 1;
-        else if (correctAnswers >= 7) skillLevel = 2;
+        if (correctAnswers >= 9) skillLevel = 5;
+        else if (correctAnswers >= 7) skillLevel = 4;
         else if (correctAnswers >= 5) skillLevel = 3;
-        else if (correctAnswers >= 3) skillLevel = 4;
-        else skillLevel = 5;
+        else if (correctAnswers >= 3) skillLevel = 2;
+        else skillLevel = 1;
 
         UserSkills.setSkillLevel(this, skillLevel);
 
@@ -158,6 +247,14 @@ public class ChatBotActivity extends AppCompatActivity {
                         "Ваш уровень навыков: %d",
                 correctAnswers, totalQuestions, skillLevel);
         addMessage(result, true);
+
+        // Задержка перед переходом на MainActivity (чтобы пользователь успел увидеть результаты)
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(ChatBotActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish(); // Закрываем текущую активность
+        }, 2500); // 2.5 секунды задержки
     }
 
     private void addMessage(String text, boolean isBot) {
