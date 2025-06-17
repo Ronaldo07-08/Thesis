@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,9 +26,11 @@ public class ChatBotActivity extends AppCompatActivity {
     private boolean areOptionsVisible = false;
     private boolean isWelcomePhase = true;
     private RecyclerView chatRecyclerView;
-    private LinearLayout answerOptionsContainer;
+    private FrameLayout answerOptionsContainer;
+    private LinearLayout buttonsContainer;
     private ChatAdapter adapter;
     private List<ChatMessage> messages = new ArrayList<>();
+
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -97,30 +101,24 @@ public class ChatBotActivity extends AppCompatActivity {
             );
         }
 
-        // Initialize views
+        toggleOptionsButton = findViewById(R.id.toggleOptionsButton);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         answerOptionsContainer = findViewById(R.id.answerOptionsContainer);
-        toggleOptionsButton = findViewById(R.id.toggleOptionsButton);
-
-        // Set click listener for the toggle button
+        buttonsContainer = findViewById(R.id.buttonsContainer);
         toggleOptionsButton.setOnClickListener(v -> {
             areOptionsVisible = !areOptionsVisible;
             answerOptionsContainer.setVisibility(areOptionsVisible ? View.VISIBLE : View.GONE);
         });
 
-        // Инициализация View
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         answerOptionsContainer = findViewById(R.id.answerOptionsContainer);
 
-        // Проверка инициализации
         if (chatRecyclerView == null) throw new RuntimeException("RecyclerView not found");
         if (answerOptionsContainer == null) throw new RuntimeException("Options container not found");
 
-        // Настройка RecyclerView
         adapter = new ChatAdapter(messages);
         chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatRecyclerView.setAdapter(adapter);
-        // Начало диалога
         startWelcomeDialog();
     }
 
@@ -135,36 +133,33 @@ public class ChatBotActivity extends AppCompatActivity {
                 addMessage("Это необходимо для выявления уровня твоих знаний!", true);
 
                 new Handler().postDelayed(() -> {
-                    // Создаем кнопку "Хорошо!" для пользователя
-                    answerOptionsContainer.removeAllViews();
+                    buttonsContainer.removeAllViews();
                     answerOptionsContainer.setVisibility(View.VISIBLE);
 
-                    Button okButton = new Button(this);
+                    Button okButton = new Button(this, null, 0, R.style.TransparentButton);
                     okButton.setText("Хорошо!");
-                    okButton.setBackgroundResource(R.drawable.widerect);
-                    okButton.setTextColor(getResources().getColor(android.R.color.black));
                     okButton.setPadding(32, 0, 32, 0);
-
+                    okButton.setTextSize(15);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    params.setMargins(0, 0, 0, 0);
+                    params.setMargins(32, 0, 32, 100);
                     okButton.setLayoutParams(params);
 
                     okButton.setOnClickListener(v -> {
                         addMessage("Хорошо!", false);
                         answerOptionsContainer.setVisibility(View.GONE);
                         isWelcomePhase = false;
-                        // Начинаем тест после ответа пользователя
                         showNextQuestion();
                     });
 
-                    answerOptionsContainer.addView(okButton);
-                }, 1000); // Задержка перед третьим сообщением
-            }, 1000); // Задержка перед вторым сообщением
-        }, 1000); // Задержка перед первым сообщением
+                    buttonsContainer.addView(okButton);
+                }, 1000);
+            }, 1000);
+        }, 1000);
     }
+
 
     private void showNextQuestion() {
         if (currentQuestionIndex >= questions.length) {
@@ -177,32 +172,29 @@ public class ChatBotActivity extends AppCompatActivity {
         showAnswerOptions(currentQuestion);
     }
 
+
     private void showAnswerOptions(Question question) {
-        answerOptionsContainer.removeAllViews();
+        buttonsContainer.removeAllViews();
         answerOptionsContainer.setVisibility(View.VISIBLE);
 
         String[] shuffledOptions = question.getShuffledOptions();
         for (int i = 0; i < shuffledOptions.length; i++) {
-            Button button = new Button(this);
-            button.setText(shuffledOptions[i]);
+            Button button = new Button(this, null, 0, R.style.TransparentButton);
 
-            // Стилизация кнопки
-            button.setBackgroundResource(R.drawable.widerect);
-            button.setTextColor(getResources().getColor(android.R.color.black));
-            button.setPadding(32, 0, 32, 0);
+            button.setText(shuffledOptions[i]);
+            button.setPadding(52, 20, 52, 0);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(0, 0, 0, 0);
+            params.setMargins(40, -40, 40, 0);
             button.setLayoutParams(params);
-
 
             final int selectedIndex = i;
             button.setOnClickListener(v -> processAnswer(question, selectedIndex));
 
-            answerOptionsContainer.addView(button);
+            buttonsContainer.addView(button);
         }
     }
 
@@ -232,7 +224,6 @@ public class ChatBotActivity extends AppCompatActivity {
         int correctAnswers = correctAnswersCount;
         int totalQuestions = questions.length;
 
-        // Определяем уровень навыков
         int skillLevel;
         if (correctAnswers >= 9) skillLevel = 5;
         else if (correctAnswers >= 7) skillLevel = 4;
@@ -248,13 +239,12 @@ public class ChatBotActivity extends AppCompatActivity {
                 correctAnswers, totalQuestions, skillLevel);
         addMessage(result, true);
 
-        // Задержка перед переходом на MainActivity (чтобы пользователь успел увидеть результаты)
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(ChatBotActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish(); // Закрываем текущую активность
-        }, 2500); // 2.5 секунды задержки
+            finish();
+        }, 2500);
     }
 
     private void addMessage(String text, boolean isBot) {

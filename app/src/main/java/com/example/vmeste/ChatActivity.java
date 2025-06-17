@@ -41,7 +41,6 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        // Инициализация элементов UI
         messageRecyclerView = findViewById(R.id.recycler_view_messages);
         messageEditText = findViewById(R.id.edit_text_message);
         sendButton = findViewById(R.id.button_send);
@@ -49,7 +48,6 @@ public class ChatActivity extends AppCompatActivity {
         // Инициализация API
         togetherApi = ApiClient.getInstance().getApi();
 
-        // Настройка RecyclerView
         messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter(messagesList);
         messageRecyclerView.setAdapter(messageAdapter);
@@ -57,13 +55,11 @@ public class ChatActivity extends AppCompatActivity {
         sendButton.setOnClickListener(v -> {
             String userMessage = messageEditText.getText().toString().trim();
             if (!userMessage.isEmpty()) {
-                // Добавляем сообщение пользователя
                 messagesList.add(new MessageAdapter.Message(userMessage, true));
                 messageAdapter.notifyItemInserted(messagesList.size() - 1);
                 messageRecyclerView.smoothScrollToPosition(messagesList.size() - 1);
                 messageEditText.setText("");
 
-                // Подготовка и отправка запроса к API
                 sendToAI(userMessage);
             }
         });
@@ -96,7 +92,6 @@ public class ChatActivity extends AppCompatActivity {
                 messageRecyclerView.smoothScrollToPosition(messagesList.size() - 1);
             }
 
-
             @Override
             public void onFailure(Call<ChatCompletionResponse> call, Throwable t) {
                 String errorMsg = "Connection error: " + t.getMessage();
@@ -108,8 +103,6 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-
-    // Адаптер для RecyclerView
     public static class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
         private List<Message> messages;
 

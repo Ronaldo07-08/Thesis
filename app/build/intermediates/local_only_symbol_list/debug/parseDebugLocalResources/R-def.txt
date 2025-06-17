@@ -18,6 +18,7 @@ drawable calendar_next
 drawable checkbox_checked
 drawable checkbox_selector
 drawable checkbox_unchecked
+drawable chillguy
 drawable clock
 drawable dialog_background
 drawable donetasks
@@ -39,8 +40,11 @@ drawable pointer
 drawable popup_cal_back
 drawable popup_calendar_bg
 drawable rect
+drawable rect_old
 drawable rectangle17
 drawable rectangle20
+drawable rectangle21
+drawable rectangle21_mini
 drawable rectangle7
 drawable rectorange
 drawable rounded_corner
@@ -70,6 +74,7 @@ id bottomPanel
 id bottom_linear
 id bottom_menu
 id button_send
+id buttonsContainer
 id calculateButton
 id calendar
 id calendarTable
@@ -97,7 +102,7 @@ id edit_text_message
 id headerLine
 id home
 id imageView
-id imageView19
+id imageView10
 id imageView2
 id imageView3
 id imageView4
@@ -130,6 +135,7 @@ id popupBg
 id popupCalendar
 id popupClose
 id popupMonth
+id rectangle21
 id recycler_view_messages
 id saveButton
 id taskButton
@@ -186,5 +192,6 @@ style CalendarDayHeader
 style CustomCheckBox
 style TaskButtonStyle
 style Theme.Vmeste
+style TransparentButton
 xml backup_rules
 xml data_extraction_rules

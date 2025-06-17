@@ -22,11 +22,9 @@ public class NotificationsActivity extends BaseActivity {
     static final String MOTIVATION_KEY = "motivation_enabled";
     static final String DEADLINES_KEY = "deadlines_enabled";
     static final String RECOMMENDATIONS_KEY = "recommendations_enabled";
-
     static final int MOTIVATION_ID = 1;
     static final int DEADLINES_ID = 2;
     static final int RECOMMENDATIONS_ID = 3;
-
     private Switch motivationButton, DedlinesButton, recomendationsButton;
     private ImageButton pointerButton;
     private AlarmManager alarmManager;
@@ -120,13 +118,11 @@ public class NotificationsActivity extends BaseActivity {
     private void scheduleDeadlineNotifications() {
         cancelNotification(DEADLINES_ID);
 
-        // Устанавливаем время срабатывания - 17:00
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 17);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
-        // Если время уже прошло сегодня, планируем на завтра
         if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
             calendar.add(Calendar.DAY_OF_YEAR, 1);
         }
@@ -142,7 +138,6 @@ public class NotificationsActivity extends BaseActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
-        // Устанавливаем ежедневное повторение
         alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(),

@@ -75,7 +75,6 @@ public class TaskDataModel {
     public float getPriority() { return priority; }
     public void setPriority(float priority) { this.priority = priority; }
 
-    // Метод для расчета приоритета
     public void calculatePriority(int userSkillLevel) {
         double complexityFactor = 0.5 + (complexity * 0.25);
         double skillMultiplier = getSkillMultiplier(userSkillLevel);

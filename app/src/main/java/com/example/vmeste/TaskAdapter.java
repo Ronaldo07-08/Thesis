@@ -161,13 +161,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 
         public void bind(TaskDataModel task) {
-            // 1. Сначала удаляем старый listener
             checkBox.setOnCheckedChangeListener(null);
-
-            // 2. Устанавливаем состояние чекбокса
             checkBox.setChecked(task.isCompleted());
 
-            // 3. Устанавливаем новый listener
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION && position < tasks.size()) {
@@ -233,7 +229,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 @Override
                 public void onEstimated(int baseTime, int complexity) {
                     loadingDialog.dismiss();
-                    // Передаем timeToTask как anchorView
                     showTimeEstimationResult(timeToTask, task.getTitle(), baseTime, complexity);
                 }
 
@@ -254,47 +249,36 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         }
 
         private void showTimeEstimationResult(View anchorView, String taskTitle, int baseTime, int complexity) {
-            // Получаем уровень навыка пользователя
             int skillLevel = UserSkills.getSkillLevel(context);
             double finalTime = calculateFinalTime(baseTime, complexity, skillLevel);
 
-            // Создаем кастомное сообщение
             String message = String.format(Locale.getDefault(),
                     "       —  %.0f мин\n\nСложность задачи: %d/5",
                     finalTime, complexity);
 
-            // Создаем кастомный диалог
             Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.custom_time_estimation_dialog); // Ваш кастомный layout
 
-            // Настраиваем фон
             Window window = dialog.getWindow();
             if (window != null) {
                 window.setBackgroundDrawableResource(R.drawable.dialog_background); // Ваша картинка для фона
                 window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                // Позиционируем диалог возле кнопки
                 int[] location = new int[2];
                 anchorView.getLocationOnScreen(location);
                 WindowManager.LayoutParams params = window.getAttributes();
-                params.x = location[0]; // X координата
-                params.y = location[1] + anchorView.getHeight(); // Y координата + высота кнопки
+                params.x = location[0];
+                params.y = location[1] + anchorView.getHeight();
                 params.gravity = Gravity.TOP | Gravity.START;
                 window.setAttributes(params);
             }
 
-            // Находим элементы в кастомном layout
             TextView messageText = dialog.findViewById(R.id.message_text);
             ImageButton closeButton = dialog.findViewById(R.id.close_button);
 
-            // Устанавливаем текст сообщения
             messageText.setText(message);
-
-            // Настраиваем кнопку закрытия
             closeButton.setOnClickListener(v -> dialog.dismiss());
-
-            // Показываем диалог
             dialog.show();
         }
 

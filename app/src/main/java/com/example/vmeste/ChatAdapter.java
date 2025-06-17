@@ -12,7 +12,6 @@ import java.util.List;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHolder> {
     private List<ChatMessage> messages;
 
-    // Конструктор, принимающий список сообщений
     public ChatAdapter(List<ChatMessage> messages) {
         this.messages = messages;
     }

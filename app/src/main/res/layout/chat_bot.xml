@@ -12,8 +12,8 @@
         android:id="@+id/imageView6"
         android:layout_width="349dp"
         android:layout_height="56dp"
-        android:layout_marginStart="31dp"
         android:layout_marginTop="51dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rounded_corners_name" />
@@ -38,27 +38,46 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="394dp"
+        android:layout_height="521dp"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.875"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toTopOf="@+id/rectangle21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/rectangle21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:src="@drawable/rectangle21"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView5" />
+
+    <FrameLayout
         android:id="@+id/answerOptionsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp">
 
-    <!-- Нижняя панель с кнопкой -->
+
+        <LinearLayout
+            android:id="@+id/buttonsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp">
+        </LinearLayout>
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/bottomPanel"
         android:layout_width="wrap_content"
@@ -99,7 +118,6 @@
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <ImageView
         android:id="@+id/menuIcon"

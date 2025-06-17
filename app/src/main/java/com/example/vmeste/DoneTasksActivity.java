@@ -48,7 +48,6 @@ public class DoneTasksActivity extends BaseActivity {
         pointerButton = findViewById(R.id.pointer);
 
         pointerButton.setOnClickListener(v -> {
-            // Завершаем текущую активность и возвращаемся назад
             finish();
         });
 

@@ -32,10 +32,7 @@ public class Question {
     }
 
     private void shuffleOptions() {
-        // Копируем и перемешиваем варианты
         shuffledOptions = options.clone();
-
-        // Запоминаем правильный ответ
         String correctAnswer = shuffledOptions[correctOptionIndex];
 
         // Перемешиваем массив

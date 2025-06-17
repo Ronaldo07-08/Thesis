@@ -89,26 +89,22 @@ public class OtherActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Введите ваш никнейм");
 
-        // Создаем поле ввода
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        // Устанавливаем кнопки
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newNickname = input.getText().toString().trim(); // trim() убирает пробелы в начале и конце
                 if (!newNickname.isEmpty()) {
-                    // Обновляем TextView
                     TextView nicknameTextView = findViewById(R.id.textView6);
                     nicknameTextView.setText(newNickname);
 
-                    // Сохраняем в SharedPreferences
                     SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("nickname", newNickname);
-                    editor.apply(); // или editor.commit() для немедленного сохранения
+                    editor.apply();
                 }
             }
         });

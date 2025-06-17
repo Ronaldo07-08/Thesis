@@ -72,7 +72,6 @@ public class TasksActivity extends BaseActivity {
         AppDatabase db = AppDatabase.getDatabase(this);
         taskDao = db.taskDao();
 
-        // Настройка прозрачной навигационной панели (если нужно)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setFlags(
@@ -81,10 +80,8 @@ public class TasksActivity extends BaseActivity {
             );
         }
 
-        // Загрузка сохранённой даты
         loadCurrentDate();
 
-        // Инициализация элементов интерфейса
         dayTextViews = new TextView[] {
                 findViewById(R.id.day1_text),
                 findViewById(R.id.day2_text),
@@ -101,22 +98,18 @@ public class TasksActivity extends BaseActivity {
                 findViewById(R.id.day5)
         };
 
-        // Инициализация TextView для дат (важно сделать это ДО вызова updateDays!)
         todayDateTextView = findViewById(R.id.todayDateTextView);
         tomorrowDateTextView = findViewById(R.id.tomorrowDateTextView);
         dayAfterTomorrowDateTextView = findViewById(R.id.dayAfterTomorrowDateTextView);
 
-        // Инициализация RecyclerView
         todayRecyclerView = findViewById(R.id.todayRecyclerView);
         tomorrowRecyclerView = findViewById(R.id.tomorrowRecyclerView);
         dayAfterTomorrowRecyclerView = findViewById(R.id.dayAfterTomorrowRecyclerView);
 
-        // Настройка LayoutManager
         todayRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         tomorrowRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         dayAfterTomorrowRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Инициализация адаптеров (один раз!)
         todayAdapter = new TaskAdapter(this, new ArrayList<>(), taskDao);
         tomorrowAdapter = new TaskAdapter(this, new ArrayList<>(), taskDao);
         dayAfterTomorrowAdapter = new TaskAdapter(this, new ArrayList<>(), taskDao);
@@ -125,17 +118,14 @@ public class TasksActivity extends BaseActivity {
         tomorrowRecyclerView.setAdapter(tomorrowAdapter);
         dayAfterTomorrowRecyclerView.setAdapter(dayAfterTomorrowAdapter);
 
-        // Настройка кнопок календаря
         ImageButton calendarBtn = findViewById(R.id.calendar);
         ImageButton nextWeekBtn = findViewById(R.id.next_week);
 
         calendarBtn.setOnClickListener(v -> showCalendarPopup());
         nextWeekBtn.setOnClickListener(v -> updateDays(3));
 
-        // Кнопка добавления задачи
         setupAddTaskButton();
 
-        // Обработчики кликов по дням
         for (int i = 0; i < dayButtons.length; i++) {
             final int dayIndex = i;
             dayButtons[i].setOnClickListener(v -> {
@@ -152,7 +142,6 @@ public class TasksActivity extends BaseActivity {
             });
         }
 
-        // Обновление интерфейса (после инициализации всех View!)
         updateDays(0);
         setupTaskObservers();
     }
@@ -161,35 +150,29 @@ public class TasksActivity extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
 
-        // Наблюдатель для сегодняшних задач
         String today = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(today).observe(this, tasks -> {
             todayAdapter.setTasks(tasks != null ? tasks : new ArrayList<>());
         });
 
-        // Наблюдатель для завтрашних задач
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String tomorrow = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(tomorrow).observe(this, tasks -> {
             tomorrowAdapter.setTasks(tasks != null ? tasks : new ArrayList<>());
         });
 
-        // Наблюдатель для послезавтрашних задач
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String dayAfterTomorrow = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(dayAfterTomorrow).observe(this, tasks -> {
             dayAfterTomorrowAdapter.setTasks(tasks != null ? tasks : new ArrayList<>());
         });
 
-        // Общий наблюдатель для всех изменений задач
         taskDao.getAllTasks().observe(this, allTasks -> {
-            // При любом изменении задач обновляем все списки
             updateTaskLists();
         });
     }
 
     private void updateDays(int daysToAdd) {
-        // Обновляем текущую дату
         Calendar calendar = Calendar.getInstance();
         calendar.set(currentYear, currentMonth, currentDay);
         calendar.add(Calendar.DAY_OF_MONTH, daysToAdd);
@@ -199,11 +182,7 @@ public class TasksActivity extends BaseActivity {
         currentYear = calendar.get(Calendar.YEAR);
 
         saveCurrentDate();
-
-        // Обновляем верхние кнопки
         updateCalendarButtons();
-
-        // Обновляем задачи
         updateTaskLists();
     }
 
@@ -212,14 +191,11 @@ public class TasksActivity extends BaseActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.set(currentYear, currentMonth, currentDay);
 
-        // Сегодня
         updateTaskList(calendar, todayDateTextView, todayAdapter);
 
-        // Завтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         updateTaskList(calendar, tomorrowDateTextView, tomorrowAdapter);
 
-        // Послезавтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         updateTaskList(calendar, dayAfterTomorrowDateTextView, dayAfterTomorrowAdapter);
     }
@@ -245,7 +221,6 @@ public class TasksActivity extends BaseActivity {
         String date = sdf.format(calendar.getTime());
         dateTextView.setText(displayFormat.format(calendar.getTime()));
 
-        // Используем LiveData для автоматического обновления
         taskDao.getTasksByDate(date).observe(this, tasks -> {
             if (tasks != null) {
                 adapter.setTasks(tasks);
@@ -260,18 +235,15 @@ public class TasksActivity extends BaseActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        // Сегодня
         String today = sdf.format(calendar.getTime());
         todayDateTextView.setText(displayFormat.format(calendar.getTime()));
         loadTasksForDate(today, todayAdapter);
 
-        // Завтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String tomorrow = sdf.format(calendar.getTime());
         tomorrowDateTextView.setText(displayFormat.format(calendar.getTime()));
         loadTasksForDate(tomorrow, tomorrowAdapter);
 
-        // Послезавтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String dayAfterTomorrow = sdf.format(calendar.getTime());
         dayAfterTomorrowDateTextView.setText(displayFormat.format(calendar.getTime()));
@@ -289,20 +261,17 @@ public class TasksActivity extends BaseActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
 
-        // Сегодня
         String today = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(today).observe(this, tasks -> {
             todayAdapter.setTasks(tasks);
         });
 
-        // Завтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String tomorrow = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(tomorrow).observe(this, tasks -> {
             tomorrowAdapter.setTasks(tasks);
         });
 
-        // Послезавтра
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         String dayAfterTomorrow = sdf.format(calendar.getTime());
         taskDao.getTasksByDate(dayAfterTomorrow).observe(this, tasks -> {
@@ -310,19 +279,17 @@ public class TasksActivity extends BaseActivity {
         });
     }
 
-
     private void updateCalendarButtons() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(currentYear, currentMonth, currentDay);
 
         for (int i = 0; i < 5; i++) {
             Calendar dayCalendar = (Calendar) calendar.clone();
-            dayCalendar.add(Calendar.DAY_OF_MONTH, i - 2); // -2, -1, 0, +1, +2
+            dayCalendar.add(Calendar.DAY_OF_MONTH, i - 2);
 
             int day = dayCalendar.get(Calendar.DAY_OF_MONTH);
             dayTextViews[i].setText(String.valueOf(day));
 
-            // Подсветка текущего дня (центральная кнопка)
             if (i == 2) {
                 dayButtons[i].setImageResource(R.drawable.calendar_ellipse_curr);
                 dayTextViews[i].setTextColor(getResources().getColor(android.R.color.white));
@@ -361,7 +328,6 @@ public class TasksActivity extends BaseActivity {
     private void showCalendarPopup() {
         View popupView = getLayoutInflater().inflate(R.layout.popup_calendar, null);
 
-        // Сохраняем PopupWindow в поле класса
         calendarPopupWindow = new PopupWindow(
                 popupView,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -374,7 +340,6 @@ public class TasksActivity extends BaseActivity {
 
         updateCalendarTable(currentYear, currentMonth, table, monthView);
 
-        // Обработчики кнопок
         ImageButton arrowRight = popupView.findViewById(R.id.arrowRight);
         ImageButton arrowLeft = popupView.findViewById(R.id.arrowLeft);
         ImageButton closeBtn = popupView.findViewById(R.id.popupClose);
@@ -405,7 +370,6 @@ public class TasksActivity extends BaseActivity {
     private TextView createDayView(int day, int year, int month) {
         TextView dayView = new TextView(this);
 
-        // Используем вес для всех ячеек
         TableRow.LayoutParams params = new TableRow.LayoutParams(
                 0, // 0 означает использование веса
                 TableRow.LayoutParams.WRAP_CONTENT,
@@ -419,7 +383,6 @@ public class TasksActivity extends BaseActivity {
         dayView.setTextColor(Color.BLACK);
         dayView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
-        // Обработчик клика
         dayView.setOnClickListener(v -> {
             currentDay = day;
             currentMonth = month;
@@ -435,38 +398,26 @@ public class TasksActivity extends BaseActivity {
     }
 
     private void updateCalendarTable(int year, int month, TableLayout table, TextView monthView) {
-        // Удаляем все строки кроме заголовка
         int childCount = table.getChildCount();
         if (childCount > 1) {
             table.removeViews(1, childCount - 1);
         }
 
-        // Устанавливаем месяц в заголовок
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM yyyy", new Locale("ru"));
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, 1);
         monthView.setText(monthFormat.format(cal.getTime()));
 
-        // Получаем количество дней в месяце
         int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        // Получаем день недели первого дня месяца (1-7, где 1=воскресенье)
         int firstDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        // Корректируем для нашего формата (пн=0, вс=6)
         int firstDayPosition = (firstDayOfWeek + 5) % 7;
-
-        // Создаем строки календаря
         int dayCounter = 1;
-
-        // Первая строка (может начинаться с пустых ячеек)
         TableRow currentRow = createNewTableRow();
 
-        // Добавляем пустые ячейки до первого дня месяца
         for (int i = 0; i < firstDayPosition; i++) {
             currentRow.addView(createEmptyDayView());
         }
 
-        // Добавляем дни первой недели
         int daysInFirstWeek = 7 - firstDayPosition;
         for (int i = 0; i < daysInFirstWeek && dayCounter <= daysInMonth; i++) {
             currentRow.addView(createDayView(dayCounter, year, month));
@@ -474,11 +425,8 @@ public class TasksActivity extends BaseActivity {
         }
         table.addView(currentRow);
 
-        // Добавляем полные недели
         while (dayCounter <= daysInMonth) {
             currentRow = createNewTableRow();
-
-            // Определяем сколько дней добавлять в текущую строку
             int daysToAdd = Math.min(7, daysInMonth - dayCounter + 1);
 
             for (int i = 0; i < daysToAdd; i++) {
@@ -486,7 +434,6 @@ public class TasksActivity extends BaseActivity {
                 dayCounter++;
             }
 
-            // Добавляем пустые ячейки, если дней меньше 7
             for (int i = daysToAdd; i < 7; i++) {
                 currentRow.addView(createEmptyDayView());
             }
@@ -502,7 +449,7 @@ public class TasksActivity extends BaseActivity {
                 TableRow.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 8, 0, 8);
         row.setLayoutParams(params);
-        row.setGravity(Gravity.CENTER); // Центрируем содержимое строки
+        row.setGravity(Gravity.CENTER);
         return row;
     }
 
@@ -522,7 +469,6 @@ public class TasksActivity extends BaseActivity {
         addTaskBtn = findViewById(R.id.addTaskButton);
         addTaskBtn.setOnClickListener(v -> {
             Intent intent = new Intent(TasksActivity.this, AddTaskActivity.class);
-            // Передаем текущую выбранную дату
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             Calendar calendar = Calendar.getInstance();
             calendar.set(currentYear, currentMonth, currentDay);

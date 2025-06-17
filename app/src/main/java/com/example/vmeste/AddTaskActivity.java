@@ -17,7 +17,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private TextInputEditText titleEditText;
     private TextInputEditText descriptionEditText;
     private int taskId = -1; // -1 означает новую задачу
-    private String taskDate; // Для хранения даты задачи
+    private String taskDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 if (task != null) {
                     titleEditText.setText(task.getTitle());
                     descriptionEditText.setText(task.getDescription());
-                    taskDate = task.getDate(); // Сохраняем дату существующей задачи
+                    taskDate = task.getDate();
                 }
             });
         });

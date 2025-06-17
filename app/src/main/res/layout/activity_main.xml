@@ -32,7 +32,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/headerLine"
         app:layout_constraintStart_toStartOf="@+id/headerLine" />
 
-
     <TextView
         android:id="@+id/CurrDate"
         android:layout_width="wrap_content"
@@ -65,7 +64,6 @@
         android:layout_marginTop="110dp"
         android:layout_marginBottom="110dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView19"
         app:layout_constraintEnd_toEndOf="@+id/headerLine"
         app:layout_constraintStart_toStartOf="@+id/headerLine"
         app:layout_constraintTop_toBottomOf="@+id/headerLine">

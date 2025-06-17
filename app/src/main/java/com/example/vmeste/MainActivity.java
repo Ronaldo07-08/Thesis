@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Прозрачная навигационная панель
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
             getWindow().setFlags(
@@ -54,36 +53,30 @@ public class MainActivity extends BaseActivity {
             );
         }
 
-        // Проверка первого запуска
         AppPreferences appPrefs = new AppPreferences(this);
         if (appPrefs.isFirstRun()) {
-            appPrefs.setFirstRun(false); // Устанавливаем флаг, что первый запуск уже был
+            appPrefs.setFirstRun(false);
             startActivity(new Intent(this, ChatBotActivity.class));
-            finish(); // Закрываем MainActivity, чтобы пользователь не мог вернуться к ней кнопкой "Назад"
+            finish();
             return;
         }
 
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
 
-        // Инициализация RecyclerView
         RecyclerView tasksRecyclerView = findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Инициализация адаптера
         adapter = new TaskAdapter(this, new ArrayList<>(), taskViewModel.getTaskDao());
         tasksRecyclerView.setAdapter(adapter);
 
-        // Получаем текущую дату
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String today = sdf.format(new Date());
 
-        // Подписка на изменения задач на сегодня
         taskViewModel.getTasksByDate(today).observe(this, tasks -> {
             adapter.setTasks(tasks != null ? tasks : new ArrayList<>());
             updateTasksCount(tasks != null ? tasks.size() : 0);
         });
 
-        // Инициализация остальных элементов
         tasksCountTextView = findViewById(R.id.tasksToday);
         dateTextView = findViewById(R.id.CurrDate);
         ImageButton addTaskBtn = findViewById(R.id.addTaskButton);
@@ -106,7 +99,6 @@ public class MainActivity extends BaseActivity {
             String title = data.getStringExtra("title");
             String description = data.getStringExtra("description");
 
-            // Создаем задачу с сегодняшней датой
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String today = sdf.format(new Date());
 

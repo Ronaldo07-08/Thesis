@@ -3023,6 +3023,7 @@ drawable calendar_next
 drawable checkbox_checked
 drawable checkbox_selector
 drawable checkbox_unchecked
+drawable chillguy
 drawable clock
 drawable design_fab_background
 drawable design_ic_visibility
@@ -3140,8 +3141,11 @@ drawable pointer
 drawable popup_cal_back
 drawable popup_calendar_bg
 drawable rect
+drawable rect_old
 drawable rectangle17
 drawable rectangle20
+drawable rectangle21
+drawable rectangle21_mini
 drawable rectangle7
 drawable rectorange
 drawable rounded_corner
@@ -3276,6 +3280,7 @@ id bounceEnd
 id bounceStart
 id buttonPanel
 id button_send
+id buttonsContainer
 id cache_measures
 id calculateButton
 id calendar
@@ -3426,7 +3431,7 @@ id ignore
 id ignoreRequest
 id image
 id imageView
-id imageView19
+id imageView10
 id imageView2
 id imageView3
 id imageView4
@@ -3596,6 +3601,7 @@ id progress_circular
 id progress_horizontal
 id radio
 id ratio
+id rectangle21
 id rectangles
 id recycler_view_messages
 id report_drawn
@@ -4898,6 +4904,7 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style TransparentButton
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar

@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {TaskDataModel.class}, version = 3) // Увеличьте версию до 3
+@Database(entities = {TaskDataModel.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract TaskDao taskDao();
 
@@ -41,8 +41,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "task_database")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3) // Добавьте обе миграции
-                            .fallbackToDestructiveMigration() // На случай ошибок
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
