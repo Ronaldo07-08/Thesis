@@ -30,7 +30,7 @@ public class ChatBotActivity extends AppCompatActivity {
     private LinearLayout buttonsContainer;
     private ChatAdapter adapter;
     private List<ChatMessage> messages = new ArrayList<>();
-
+    private boolean isRectangle21Visible = true;
 
     private int currentQuestionIndex = 0;
     private int correctAnswersCount = 0;
@@ -105,9 +105,31 @@ public class ChatBotActivity extends AppCompatActivity {
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
         answerOptionsContainer = findViewById(R.id.answerOptionsContainer);
         buttonsContainer = findViewById(R.id.buttonsContainer);
+        ImageView rectangle21 = findViewById(R.id.rectangle21);
+
+        isRectangle21Visible = true;
+        rectangle21.setVisibility(View.VISIBLE);
+
         toggleOptionsButton.setOnClickListener(v -> {
             areOptionsVisible = !areOptionsVisible;
-            answerOptionsContainer.setVisibility(areOptionsVisible ? View.VISIBLE : View.GONE);
+
+            if (areOptionsVisible) {
+                answerOptionsContainer.setVisibility(View.VISIBLE);
+                rectangle21.setVisibility(View.VISIBLE);
+
+                // Анимация появления
+                answerOptionsContainer.setAlpha(0f);
+                rectangle21.setAlpha(0f);
+
+                answerOptionsContainer.animate().alpha(1f).setDuration(300).start();
+                rectangle21.animate().alpha(1f).setDuration(300).start();
+            } else {
+                // Анимация исчезновения
+                answerOptionsContainer.animate().alpha(0f).setDuration(300)
+                        .withEndAction(() -> answerOptionsContainer.setVisibility(View.GONE)).start();
+                rectangle21.animate().alpha(0f).setDuration(300)
+                        .withEndAction(() -> rectangle21.setVisibility(View.GONE)).start();
+            }
         });
 
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
@@ -172,15 +194,18 @@ public class ChatBotActivity extends AppCompatActivity {
         showAnswerOptions(currentQuestion);
     }
 
-
     private void showAnswerOptions(Question question) {
         buttonsContainer.removeAllViews();
         answerOptionsContainer.setVisibility(View.VISIBLE);
 
+        // Не скрываем rectangle21, а показываем его
+        ImageView rectangle21 = findViewById(R.id.rectangle21);
+        rectangle21.setVisibility(View.VISIBLE);
+        areOptionsVisible = true;
+
         String[] shuffledOptions = question.getShuffledOptions();
         for (int i = 0; i < shuffledOptions.length; i++) {
             Button button = new Button(this, null, 0, R.style.TransparentButton);
-
             button.setText(shuffledOptions[i]);
             button.setPadding(52, 20, 52, 0);
 
@@ -211,7 +236,9 @@ public class ChatBotActivity extends AppCompatActivity {
         }
 
         currentQuestionIndex++;
+
         answerOptionsContainer.setVisibility(View.GONE);
+        areOptionsVisible = false;
 
         if (currentQuestionIndex < questions.length) {
             new Handler().postDelayed(this::showNextQuestion, 1500);
