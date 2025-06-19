@@ -319,7 +319,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     "Подробное описание: " + desc + "\n\n" +
                     "Учти все детали из описания при оценке.\n\n" +
                     "Ответь строго в формате JSON: {\"base_time\": X, \"complexity\": Y} " +
-                    "где X - время в минутах (целое число), Y - сложность от 1 до 5 (целое число)";
+                    "где X - время в минутах (целое число), Y - сложность от 1 до 5 (целое число). " +
+                    "Не добавляй никаких дополнительных комментариев или текста вокруг JSON.";
 
             List<Message> apiMessages = new ArrayList<>();
             apiMessages.add(new Message("user", prompt));
@@ -333,20 +334,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 @Override
                 public void onResponse(Call<ChatCompletionResponse> call, Response<ChatCompletionResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        try {
-                            String content = response.body().choices.get(0).message.content;
-                            String jsonString = extractJson(content);
-                            if (jsonString == null) {
-                                callback.onError("Не удалось извлечь JSON из ответа");
-                                return;
-                            }
-                            JSONObject json = new JSONObject(jsonString);
-                            int baseTime = json.getInt("base_time");
-                            int complexity = json.getInt("complexity");
-                            callback.onEstimated(baseTime, complexity);
-                        } catch (Exception e) {
-                            callback.onError("Ошибка парсинга ответа: " + e.getMessage());
-                        }
+                        handleAiResponse(response.body(), callback);
                     } else {
                         callback.onError("Ошибка API: " + response.code());
                     }
@@ -359,12 +347,30 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             });
         }
 
+        private void handleAiResponse(ChatCompletionResponse response, TimeEstimationCallback callback) {
+            try {
+                String content = response.choices.get(0).message.content;
+                String jsonString = extractJson(content);
+
+                if (jsonString == null) {
+                    callback.onError("Не удалось извлечь JSON из ответа");
+                    return;
+                }
+
+                JSONObject json = new JSONObject(jsonString);
+                int baseTime = json.getInt("base_time");
+                int complexity = json.getInt("complexity");
+                callback.onEstimated(baseTime, complexity);
+            } catch (Exception e) {
+                callback.onError("Ошибка парсинга ответа: " + e.getMessage());
+            }
+        }
+
         private String createPrompt(String title, String description) {
-            return "Оцени время выполнения задачи и ее сложность. " +
-                    "Задача: " + title + "\nОписание: " +
-                    (description != null && !description.isEmpty() ? description : "нет описания") + "\n\n" +
-                    "Ответь строго в формате JSON: {\"base_time\": X, \"complexity\": Y} " +
-                    "где X - время в минутах (только число), Y - сложность от 1 до 5 (только число)";
+            return "Ответь СТРОГО в формате JSON без каких-либо дополнительных текстовых пояснений. " +
+                    "Формат: {\"base_time\": X, \"complexity\": Y} " +
+                    "где X - время в минутах (только число), Y - сложность от 1 до 5 (только число). " +
+                    "Задача: " + title + "\nОписание: " + description;
         }
 
         private ChatCompletionRequest createRequest(String prompt) {
@@ -396,12 +402,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             }
         }
 
-        private String extractJson(String text) {
-            String regex = "\\{.*?\\}";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(text);
-            if (matcher.find()) {
-                return matcher.group(0);
+        private String extractJson(String content) {
+            content = content.replace("```json", "")
+                    .replace("```", "")
+                    .replace("`", "")
+                    .trim();
+
+            int start = content.lastIndexOf('{');
+            int end = content.indexOf('}', start) + 1;
+
+            if (start >= 0 && end > start && end <= content.length()) {
+                return content.substring(start, end);
             }
             return null;
         }
